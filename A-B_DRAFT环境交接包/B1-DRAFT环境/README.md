@@ -99,10 +99,16 @@ python B1-DRAFT环境/run_b1.py --broken-tag e3-draft-tiny-greeting:broken-20260
 
 ## 7. 已验证结果
 
-最终有效运行目录：
+最新有效运行目录：
 
 ```text
-evidence/run-20260929T073452Z/
+evidence/run-20260929T161653Z/
 ```
 
-该次运行结果为 `ACCEPTED`：失败样例退出码为 `127`，日志包含 `make: not found`；参考镜像构建、镜像检查、工具版本检查、可执行文件检查和断网运行的退出码均为 `0`；stdout 严格匹配 `hello E3\n`。详细结果见 [`evidence/FINAL_RESULT.md`](evidence/FINAL_RESULT.md)。
+该次运行结果为 `ACCEPTED`：失败样例退出码为 `127`，日志定位到 `make: not found`；参考镜像构建、镜像检查、工具版本检查、可执行文件检查和断网运行均通过；stdout 严格匹配 `hello E3\n`。完整结果和当前有效成功运行证据见 [`evidence/FINAL_RESULT.md`](evidence/FINAL_RESULT.md)。此前提交的成功运行保留为历史记录。
+
+## 8. A 组交叉验收
+
+A 组按 B3 项目约定核对了输入文件、`make`、`./hello` 和预期输出。最新 B1 运行从提交 `36f6dd61689f9cdf087d0f83a7d60d6d05db2225` 执行，完整通过失败构建、参考构建、工具版本、可执行文件和断网功能验证。验收结论见 [A 组 B1 DRAFT 样例环境验收记录](../../A-BuildChecker-EChecker-接口文档/docs/B1-DRAFT环境验收.md)。
+
+镜像目前是 Colima 本地镜像。Registry 发布、共享传输和 A 组跨机器按 digest 获取尚未验证；双方确认交付方式并完成接收验证后，再更新实例值表。

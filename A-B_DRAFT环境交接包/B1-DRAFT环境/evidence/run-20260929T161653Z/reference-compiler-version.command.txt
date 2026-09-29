@@ -1,0 +1,2 @@
+cwd=/Users/zane/devops/devops_lab1/A-B_DRAFT环境交接包
+command=/opt/homebrew/bin/docker run --rm --network none --entrypoint gcc e3-draft-tiny-greeting:reference --version

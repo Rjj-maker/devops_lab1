@@ -134,6 +134,8 @@ DRAFT 与 FULL_CHECK 的 `build_command` 是否使用相同真实值：待确认
 
 ## 11. 当前产物和证据
 
+B1 的 Tiny Greeting Docker 样例及 2026-09-29 归档运行记录属于 E03 样例环境验收，不代表正式项目的 DRAFT API Job 或 Artifact 交付。A 组核对结果见 [`B1 DRAFT 样例环境验收记录`](../../A-BuildChecker-EChecker-接口文档/docs/B1-DRAFT环境验收.md)。下表的“真实产物”指双方约定接口对正式项目产生并交接的记录，未完成的内容继续标记为“待确认”。
+
 | 项目 | 状态 |
 | --- | --- |
 | 真实 Dockerfile | 待确认 |

@@ -56,4 +56,4 @@ reference-verify.exit-code.txt
 - `git.status` 记录运行时尚未提交的文件；
 - 操作系统、CPU 架构、Docker 版本、镜像 ID 和运行时间已经记录。
 
-最终有效结果见 [`FINAL_RESULT.md`](FINAL_RESULT.md)，对应目录为 `run-20260929T073452Z/`。
+当前有效结果见 [`FINAL_RESULT.md`](FINAL_RESULT.md)，对应目录为 `run-20260929T161653Z/`。先前已提交的 `run-20260929T073452Z/` 保留为历史成功记录；两次代理故障重试目录已清理。

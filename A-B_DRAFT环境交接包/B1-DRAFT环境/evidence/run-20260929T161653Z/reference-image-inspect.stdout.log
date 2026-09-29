@@ -1,0 +1,43 @@
+[
+    {
+        "Architecture": "amd64",
+        "Config": {
+            "Cmd": [
+                "./hello"
+            ],
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "WorkingDir": "/work"
+        },
+        "Created": "2026-09-30T00:28:22.949385901+08:00",
+        "Descriptor": {
+            "digest": "sha256:66b6924106f5f9c5e66705c1678a58dfe81326ede0b3bc61d3a408f3a3a2c06a",
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "size": 1399
+        },
+        "Id": "sha256:66b6924106f5f9c5e66705c1678a58dfe81326ede0b3bc61d3a408f3a3a2c06a",
+        "Metadata": {
+            "LastTagTime": "2026-09-29T16:28:22.980769776Z"
+        },
+        "Os": "linux",
+        "Parent": "sha256:ac01189b8b13fa91577278628daef52294fca6caf336e26fb50f6327c7c625ef",
+        "RepoDigests": [
+            "e3-draft-tiny-greeting@sha256:66b6924106f5f9c5e66705c1678a58dfe81326ede0b3bc61d3a408f3a3a2c06a"
+        ],
+        "RepoTags": [
+            "e3-draft-tiny-greeting:reference"
+        ],
+        "RootFS": {
+            "Layers": [
+                "sha256:34467cc93912af891dfee8a3902adf9b4f355a9bca4eaa46f658d1181a21de0d",
+                "sha256:5252d91aa58080b1fd3876ad7bff3ea2e9898167041b8e32f4569cd8153858fe",
+                "sha256:8dc0544f0ae8bdf86edae95d9cf2c6e738eae8354a514814877fa622d136d1dd",
+                "sha256:720f1d1c5f445d6851dd1525d07180ef9316d38b4f78a8c365bc6ba293d31ab0",
+                "sha256:d388c97d416a7af69f9d2be5c1a81a45661dc0052bb9438ebf77bbdc75613fa2"
+            ],
+            "Type": "layers"
+        },
+        "Size": 98035666
+    }
+]

@@ -40,6 +40,7 @@
 | 文件 | 说明 |
 |------|------|
 | `docs/environment-handoff.md` | A 组消费 DRAFT 环境的契约规则 |
+| `docs/B1-DRAFT环境验收.md` | A 组对 B1 样例环境、运行证据和交付可用性的交叉验收 |
 | `docs/instance-values.md` | 双方约定的真实实例值 |
 | `examples/full-check-create-request.example.json` | BuildChecker 创建请求（§7.1） |
 | `examples/full-check-create-receipt.example.json` | BuildChecker 202 创建回执（`CreateReceipt`） |

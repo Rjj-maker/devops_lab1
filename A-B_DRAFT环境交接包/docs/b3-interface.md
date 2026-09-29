@@ -106,4 +106,11 @@ make
 - 功能验证 stdout、stderr、退出码
 - `hello` 是否存在及是否可执行
 
-失败时还要保存失败命令、原始日志和对应版本。`Dockerfile.broken`、`Dockerfile.reference`、镜像 ID、镜像 digest 和真实日志属于 B1/环境交接后续交付，本 B3 文档不虚构这些结果。
+失败时还要保存失败命令、原始日志和对应版本。B1 的 `Dockerfile.broken`、`Dockerfile.reference`、镜像信息和运行记录见 [`B1-DRAFT环境/README.md`](../B1-DRAFT环境/README.md) 及 [A 组交叉验收记录](../../A-BuildChecker-EChecker-接口文档/docs/B1-DRAFT环境验收.md)。本文件只定义项目接口，不替代 B1 的运行证据。
+
+
+## 7. B1 环境交接状态
+
+B1 已基于本接口准备 `Dockerfile.broken` 和 `Dockerfile.reference`。最新运行已从当前 B1 提交完成失败构建、参考构建、工具版本和功能验证；A 组交叉验收确认样例符合本接口定义。版本追溯和镜像跨组取得状态见 [B1 DRAFT 样例环境验收记录](../../A-BuildChecker-EChecker-接口文档/docs/B1-DRAFT环境验收.md)。
+
+该验收只覆盖 Tiny Greeting 固定样例。镜像 Registry 发布和 A 组按 digest 获取尚未验证。E03 最终项目、BuildChecker 检测实现以及 C0/C1/C2 版本不由本接口样例代替。

@@ -12,23 +12,24 @@
 
 | 项目 | 状态 |
 | --- | --- |
-| 真实仓库、commit 与项目目录 | 待确认 |
-| 真实构建与测试命令 | 待确认 |
-| 真实 Dockerfile | 待确认 |
-| 真实镜像及 digest | 待确认 |
-| 真实构建结果 | 待确认 |
-| 真实测试结果 | 待确认 |
-| B3 固定 DRAFT 输入与接口样例 | 已提交；仅为可重跑样例，不代表真实联调完成 |
+| E03 Tiny Greeting 项目输入和命令 | 已提交；`make` 与 `./hello` 已按 B3 约定核对 |
+| B1 失败/参考构建和当前提交验证 | 已通过；最新运行结果为 `ACCEPTED`，记录见 `B1-DRAFT环境/evidence/FINAL_RESULT.md` |
+| 最新 B1 运行的代码基准 | `36f6dd61689f9cdf087d0f83a7d60d6d05db2225`；B1 输入及 Dockerfile 摘要见运行 `summary.json` |
+| A 组取得相同参考镜像 | 待确认；当前只有本地镜像信息，没有 Registry 发布或 A 组拉取记录 |
+| E03 最终项目仓库、commit 与项目目录 | 待确认；Tiny Greeting 是课程固定样例 |
+| E03 最终项目构建与测试命令 | 待确认；当前已核对的是 Tiny Greeting 样例命令 |
 | Artifact 共享位置和访问权限 | 待确认 |
-| A/B 首次环境交付与试跑结果 | 待确认 |
+| DRAFT API 的真实 Job 与 Artifact 交付 | 待确认；当前记录是 Docker 样例运行，不是 API 联调 |
 
-本目录没有生成或附带真实 Dockerfile、镜像、日志、Artifact 或测试结果。
+本包包含 B1 样例 Dockerfile、日志和镜像检查记录，但不包含可直接拉取的镜像本体、Registry 发布证明、真实 DRAFT API Job 或跨组 Artifact 读取证明。
 
 ## 文件索引
 
 - [`docs/environment-handoff.md`](docs/environment-handoff.md)：环境交接所需的契约规则及核对点。
 - [`docs/instance-values.md`](docs/instance-values.md)：真实联调参数表；未确定内容统一标记为“待确认”。
 - [`docs/b3-interface.md`](docs/b3-interface.md)：B3 负责的具体 DRAFT 输入、构建/验证命令和预期结果。
+- [`B1-DRAFT环境/README.md`](B1-DRAFT环境/README.md)：B1 的失败构建样例、参考镜像构建和运行证据。
+- [A 组 B1 环境验收记录](../A-BuildChecker-EChecker-接口文档/docs/B1-DRAFT环境验收.md)：A 组对样例、版本追溯和镜像交接的核对结果。
 - [`fixtures/draft/README.md`](fixtures/draft/README.md)：Tiny Greeting 项目级 README。
 - [`fixtures/draft/interface.json`](fixtures/draft/interface.json)：供 BuildChecker 读取的机器可读接口约定。
 - [`examples/README.md`](examples/README.md)：JSON 示例的占位值和使用限制。
