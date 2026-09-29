@@ -18,6 +18,7 @@
 | 真实镜像及 digest | 待确认 |
 | 真实构建结果 | 待确认 |
 | 真实测试结果 | 待确认 |
+| B3 固定 DRAFT 输入与接口样例 | 已提交；仅为可重跑样例，不代表真实联调完成 |
 | Artifact 共享位置和访问权限 | 待确认 |
 | A/B 首次环境交付与试跑结果 | 待确认 |
 
@@ -27,6 +28,9 @@
 
 - [`docs/environment-handoff.md`](docs/environment-handoff.md)：环境交接所需的契约规则及核对点。
 - [`docs/instance-values.md`](docs/instance-values.md)：真实联调参数表；未确定内容统一标记为“待确认”。
+- [`docs/b3-interface.md`](docs/b3-interface.md)：B3 负责的具体 DRAFT 输入、构建/验证命令和预期结果。
+- [`fixtures/draft/README.md`](fixtures/draft/README.md)：Tiny Greeting 项目级 README。
+- [`fixtures/draft/interface.json`](fixtures/draft/interface.json)：供 BuildChecker 读取的机器可读接口约定。
 - [`examples/README.md`](examples/README.md)：JSON 示例的占位值和使用限制。
 - `examples/*.example.json`：DRAFT 请求、回执、Job 结果及 FULL_CHECK 请求的结构样例。
 

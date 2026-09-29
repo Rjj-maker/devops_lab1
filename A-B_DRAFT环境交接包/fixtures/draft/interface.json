@@ -1,0 +1,59 @@
+{
+  "project": {
+    "id": "e3-draft-tiny-greeting",
+    "version": "2026-09-06",
+    "version_label": "e3-draft-tiny-greeting@2026-09-06",
+    "project_root": "A-B_DRAFT环境交接包/fixtures/draft",
+    "platform": "linux",
+    "network_required": false
+  },
+  "inputs": [
+    "main.c",
+    "Makefile",
+    "README.md",
+    "interface.json"
+  ],
+  "build": {
+    "command": "make",
+    "exit_code": 0,
+    "artifacts": [
+      {
+        "path": "hello",
+        "kind": "executable",
+        "required": true
+      }
+    ]
+  },
+  "verify": {
+    "command": "./hello",
+    "exit_code": 0,
+    "stdout": "hello E3\n",
+    "stdout_match": "exact",
+    "stderr_match": "record_only"
+  },
+  "clean_build": {
+    "commands": [
+      "make clean",
+      "make"
+    ],
+    "each_exit_code": 0
+  },
+  "record": {
+    "required": [
+      "commands",
+      "working_directory",
+      "project_version",
+      "git_sha_if_available",
+      "os_and_architecture",
+      "compiler_version",
+      "make_version",
+      "build_stdout",
+      "build_stderr",
+      "build_exit_code",
+      "verify_stdout",
+      "verify_stderr",
+      "verify_exit_code",
+      "artifact_presence_and_executable_bit"
+    ]
+  }
+}
