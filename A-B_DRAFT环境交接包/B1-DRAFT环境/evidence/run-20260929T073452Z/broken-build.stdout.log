@@ -1,0 +1,14 @@
+Sending build context to Docker daemon  202.8kB
+
+Step 1/5 : FROM python:3.13-slim
+ ---> 7c61056e61ac
+Step 2/5 : WORKDIR /work
+ ---> Using cache
+ ---> 246b38242bad
+Step 3/5 : COPY fixtures/draft/main.c fixtures/draft/Makefile ./
+ ---> Using cache
+ ---> f9646fc73a61
+Step 4/5 : RUN make
+ ---> Running in 1e9d6adbd09f
+[91m/bin/sh: 1: make: not found
+[0m

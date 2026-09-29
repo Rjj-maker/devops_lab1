@@ -1,0 +1,2 @@
+cwd=/mnt/e/dasanshang/Devops/项目/devops_lab1/A-B_DRAFT环境交接包
+command=/usr/bin/docker image inspect e3-draft-tiny-greeting:reference

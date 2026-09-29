@@ -1,0 +1,11 @@
+FROM python:3.13-slim
+
+WORKDIR /work
+
+COPY fixtures/draft/main.c fixtures/draft/Makefile ./
+
+# 该基础镜像没有 GNU Make 和 C 编译器。本步骤应以非零退出码失败，
+# 用于保留 DRAFT 的可定位失败样例。
+RUN make
+
+CMD ["./hello"]
