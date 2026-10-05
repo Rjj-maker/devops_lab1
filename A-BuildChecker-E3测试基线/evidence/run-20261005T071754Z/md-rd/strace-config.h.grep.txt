@@ -1,0 +1,1 @@
+openat(AT_FDCWD, "config.h", O_RDONLY|O_NOCTTY) = 4

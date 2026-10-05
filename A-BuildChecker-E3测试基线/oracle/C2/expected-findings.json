@@ -1,0 +1,19 @@
+{
+  "provenance": "INSTRUCTOR_ORACLE",
+  "scope": "project-headers-of-main.o",
+  "system_headers_excluded": true,
+  "findings": [
+    {
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "feature.h",
+      "rationale": "C2 keeps C1 source. The missing feature.h declaration remains."
+    }
+  ],
+  "command_change": {
+    "target": "main.o",
+    "from_cflags": "-O0 -Wall -Wextra -std=c11",
+    "to_cflags": "-O0 -DMODE=7 -Wall -Wextra -std=c11",
+    "note": "This is not an MD/RD finding. Ordinary make may keep C1 objects and still print 12; clean build prints 19."
+  }
+}

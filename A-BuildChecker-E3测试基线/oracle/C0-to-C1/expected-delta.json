@@ -1,0 +1,14 @@
+{
+  "from": "C0",
+  "to": "C1",
+  "provenance": "INSTRUCTOR_ORACLE",
+  "introduced": [
+    {
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "feature.h"
+    }
+  ],
+  "resolved": [],
+  "unchanged": []
+}

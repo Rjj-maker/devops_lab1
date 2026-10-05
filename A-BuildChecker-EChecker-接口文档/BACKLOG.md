@@ -30,11 +30,11 @@
 
 | ID | 任务 | 责任方 | 产物 | 验收条件 | 状态 |
 |----|------|--------|------|----------|------|
-| E3-01 | MD/RD 项目准备 | A 组 | 可运行的 BuildChecker 项目 | 支持 C0/C1/C2 基线 | TODO |
-| E3-02 | C0/C1/C2 提交版本 | A+B 各自 | 三个连续 commit | 增量变化可追溯 | TODO |
-| E3-03 | 基线依赖图 | A 组 | C0 的 actual.json | EChecker 可消费 | TODO |
-| E3-04 | 增量检测基线 | A 组 | C1 对比 C0 的结果 | 新增/消除可识别 | TODO |
-| E3-05 | 并行测试执行 | A 组 | 测试报告 | 全量+增量均通过 | TODO |
+| E3-01 | MD/RD 项目准备 | A 组 BuildChecker | `A-BuildChecker-E3测试基线/fixtures/md-rd/` | 可 `make && ./app`；含一条 MD 和一条 RD 及人工依据 | DONE |
+| E3-02 | C0/C1/C2 提交版本 | A 组 BuildChecker | `fixtures/commits/` 与 `evidence/run-*/commits/*.sha` | 三个连续 commit 可追溯；C1 引入 MD，C2 只改命令 | DONE |
+| E3-03 | 基线依赖图 | A 组 BuildChecker | C0 `actual.json` / `declared.json` | C0 无 MD/RD；图只覆盖 `main.o` 项目头文件 | DONE |
+| E3-04 | 增量检测基线 | A 组 BuildChecker | `commits/c0-to-c1-delta.json` | C1 相对 C0 新增 `feature.h` 缺失；C2 该发现未消除 | DONE |
+| E3-05 | 并行测试执行 | A 组 BuildChecker | `evidence/run-20261005T071837Z/summary.json` | 基线行为与 oracle 一致，结果 `ACCEPTED`。不含 E5 服务和 B4 Patch 复核 | DONE |
 
 ---
 
@@ -47,6 +47,7 @@
 - E2-08 异步 Job 决策记录见 `ADR-001-async-job.md`。
 - E2-10 A 组样例通过对应 Schema `$defs` 校验；缺少 `baseline` 和非法 `job_type` 的输入按预期被拒绝。baseline 与 base commit、Job/报告字段及计数的静态一致性检查见 `E2_COMPLETION.md`。
 - E2-11 A 组完成情况见 `E2_COMPLETION.md`。B 组确认项仍未完成。
+- E3-01～E3-05 BuildChecker 测试基线见 `A-BuildChecker-E3测试基线/`。有效运行 `evidence/run-20261005T071837Z/` 为 `ACCEPTED`。B3 确认、B1 为本项目提供镜像、B4 Patch 复核仍待对方。
 
 ## 未完成或受外部确认阻塞
 
@@ -56,5 +57,8 @@
 | E2-06 Artifact 共享机制 | BLOCKED | 真实 `pair_id`、共享位置、读写权限和同步方式尚未确认 | 确认同号配对组和共享方案后更新 `docs/instance-values.md`，再验证双方读取 |
 | E2-07 三轮配对练习 | BLOCKED | 当前仓库没有可核对的三轮讨论记录或双方确认记录 | 与配对 B 组完成并保存三轮记录 |
 | E2-11 双组完成情况登记 | IN_PROGRESS | 本文件和 A 组完成情况已经记录；B 组状态及双方共同确认尚未登记 | 汇总 B 组交付与双方验收结果 |
+| E3 B3 确认检测项目 README | WAITING | BuildChecker 接口已交付，B3 尚未确认 DRAFT 可按同一 README 运行 | B3 按 `A-BuildChecker-E3测试基线/docs/a1-interface.md` 确认 |
+| E3 DRAFT 环境绑定 MD/RD 项目 | BLOCKED | 步骤②由 A 组环境负责人对接 B1；Tiny Greeting 不是本检测项目 | 为本项目提供 Dockerfile/`image_ref` 后再在该环境复跑 |
+| E3 Patch 验证与失败恢复 | BLOCKED | 步骤④由 A 组检测/复核负责人对接 B4 | B4 提供候选 Patch 与拒绝恢复记录后复核 MD/RD |
 
-`pair03`、仓库地址、commit、命令、镜像、Artifact 实例值和样例摘要继续作为占位值，直至配对组或 E3 项目资料确认真实值。E3 项目和真实试跑不属于 E2 当前交付。
+`pair03` 等联调实例值仍为占位，直到双方确认。E3 BuildChecker 基线的真实 SHA 与运行记录见 `A-BuildChecker-E3测试基线/evidence/`。

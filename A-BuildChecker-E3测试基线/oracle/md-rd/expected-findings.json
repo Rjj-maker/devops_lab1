@@ -1,0 +1,19 @@
+{
+  "provenance": "INSTRUCTOR_ORACLE",
+  "scope": "project-headers-of-main.o",
+  "system_headers_excluded": true,
+  "findings": [
+    {
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "config.h",
+      "rationale": "main.c includes and uses config.h, but Makefile declares main.o: main.c unused.h."
+    },
+    {
+      "type": "REDUNDANT",
+      "target": "main.o",
+      "dependency": "unused.h",
+      "rationale": "Makefile declares unused.h, but no translation unit of main.o includes it."
+    }
+  ]
+}

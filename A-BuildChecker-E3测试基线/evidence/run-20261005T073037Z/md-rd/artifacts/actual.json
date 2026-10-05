@@ -1,0 +1,35 @@
+{
+  "schema_version": "2.0",
+  "graph_type": "ACTUAL_GRAPH",
+  "scope": "project-headers-of-main.o",
+  "target": "main.o",
+  "configuration_id": "cc-default",
+  "commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+  "nodes": [
+    {
+      "id": "main.o",
+      "kind": "object"
+    },
+    {
+      "id": "config.h",
+      "kind": "header"
+    },
+    {
+      "id": "main.c",
+      "kind": "source"
+    }
+  ],
+  "edges": [
+    {
+      "from": "main.o",
+      "to": "config.h",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "main.o",
+      "to": "main.c",
+      "kind": "prerequisite"
+    }
+  ],
+  "cflags": "-Wall -Wextra -std=c11"
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "2.0",
+  "report_type": "ERROR_REPORT",
+  "producer_job_id": "job-e3-a-c2-001",
+  "repository": {
+    "url": "https://github.com/Rowan-hhh/devops_lab1.git",
+    "commit": "5efd7ece7569439950881a9b52b184356aa91687"
+  },
+  "configuration_id": "cc-MODE7",
+  "findings": [
+    {
+      "finding_id": "finding-e3-c2-missing-001",
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "feature.h",
+      "commit": "5efd7ece7569439950881a9b52b184356aa91687",
+      "location": {
+        "file": "Makefile",
+        "line": 11,
+        "column": 1
+      },
+      "evidence": {
+        "summary": "main.o reads feature.h, but Makefile does not declare it.",
+        "process": "quoted-include vs makefile-prereq",
+        "observed_file": "feature.h",
+        "declaration_file": "Makefile"
+      },
+      "detector": "INSTRUCTOR_ORACLE"
+    }
+  ]
+}

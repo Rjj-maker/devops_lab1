@@ -1,0 +1,1 @@
+本次运行在创建 C0/C1/C2 证据目录前失败（`commits/` 未 mkdir）。MD/RD 行为实验已经跑完。完整 ACCEPTED 结果见之后的 `run-*` 目录。

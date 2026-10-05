@@ -1,0 +1,21 @@
+{
+  "from": "C1",
+  "to": "C2",
+  "from_commit": "9c3e06606aa42afef25c53dbb5eb0c5a6330e5ea",
+  "to_commit": "5efd7ece7569439950881a9b52b184356aa91687",
+  "introduced": [],
+  "resolved": [],
+  "unchanged": [
+    {
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "feature.h"
+    }
+  ],
+  "command_change": {
+    "from_cflags": "-O0 -Wall -Wextra -std=c11",
+    "to_cflags": "-O0 -DMODE=7 -Wall -Wextra -std=c11",
+    "incremental_stdout": "19\n",
+    "clean_stdout": "19\n"
+  }
+}
