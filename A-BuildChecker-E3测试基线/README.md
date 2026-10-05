@@ -26,6 +26,7 @@ E3 只准备可判断对错的项目、人工预期、命令和实际观察。�
 
 | 文件 | 用途 |
 | --- | --- |
+| `HANDOFF.md` | 给 B3 / B2 / 组内环境、复核、交付的交接说明 |
 | `docs/a1-interface.md` | 给 B3 的项目、命令、退出码和预期输出 |
 | `docs/md-rd-oracle.md` | 人工预期和判断依据 |
 | `docs/c0-c1-c2-plan.md` | 三个提交的变化计划 |
@@ -78,6 +79,8 @@ python3 A-BuildChecker-E3测试基线/scripts/run_a_buildchecker.py
 ## 6. 已验证结果
 
 最新有效运行见 [`evidence/FINAL_RESULT.md`](evidence/FINAL_RESULT.md)。
+
+发给对方时用 [`HANDOFF.md`](HANDOFF.md)，按角色读对应小节即可。
 
 ## 7. 给 B 组的边界
 

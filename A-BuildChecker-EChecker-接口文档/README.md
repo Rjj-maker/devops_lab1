@@ -59,6 +59,7 @@
 | `BACKLOG.md` | 任务 Backlog |
 | `AI_USAGE.md` | AI 使用记录 |
 | `../A-BuildChecker-E3测试基线/` | E3 BuildChecker 检测项目、人工预期、依赖图和运行证据 |
+| `../A-BuildChecker-E3测试基线/HANDOFF.md` | E3 BuildChecker 向 B3 / B2 及组内其他人的交接说明 |
 
 ## 使用边界
 
