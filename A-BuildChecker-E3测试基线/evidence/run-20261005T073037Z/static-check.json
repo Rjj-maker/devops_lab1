@@ -1,0 +1,52 @@
+{
+  "status": "PASSED",
+  "checked_at": "2026-10-05T07:30:37Z",
+  "problems": [],
+  "oracle_ok": {
+    "md-rd": true,
+    "C0": true,
+    "C1": true,
+    "C2": true
+  },
+  "interfaces": {
+    "md-rd": {
+      "build_command": true,
+      "verify_command": true,
+      "stdout": true
+    },
+    "C0": {
+      "build_command": true,
+      "verify_command": true,
+      "stdout": true
+    },
+    "C1": {
+      "build_command": true,
+      "verify_command": true,
+      "stdout": true
+    },
+    "C2": {
+      "build_command": true,
+      "verify_command": true,
+      "stdout": true
+    }
+  },
+  "source_sha256": {
+    "fixtures/md-rd/main.c": "a1bbac023098d5bdd6302977e565b57c4959ee2c34d0787c1c5b2ea5c208ee9f",
+    "fixtures/md-rd/config.h": "2573efdf6e122c087130fd32f829694daf92429315b05aa27d5265a790fdb50d",
+    "fixtures/md-rd/unused.h": "2412a11e8d5f3a17992cd4527501dc13a6671ffdc9bf30d0594d89ccd12641a6",
+    "fixtures/md-rd/Makefile": "a7e803b46ff58ae45e1ae6f2658b80461bd538aa5faad0d35224a029614631f6",
+    "fixtures/md-rd/README.md": "d9ec951ce5b61ded1bee71fa2238f448f0af63bf55fe42b01e799e06cbef2f24",
+    "fixtures/md-rd/interface.json": "d0195e02ec1bb120d083f4c79b7f4261c12511bdaf2232782280e03c873ef7c8",
+    "fixtures/commits/C0/main.c": "9ffb9b328f7a57b66b6e505dee745b7d42613fb7cb8a8afad393990563ec3aa5",
+    "fixtures/commits/C0/config.h": "9b27eff003a31a60c0640b0ec1e96def69821cdbce73e2d59b3ba5ccf912d368",
+    "fixtures/commits/C0/Makefile": "5ad2520f2c7172f66572274f924d840687b704a9f7c66ae4e643c9d4d320a32a",
+    "fixtures/commits/C1/feature.h": "4c8d7e6c0df714b5fe81b2bdf527c820eaca04cae09f364666974176fc7b1132",
+    "fixtures/commits/C2/Makefile": "92b23ed87d261886cac5ce6b11644173c2ccd65edc0590d3586ab97458b4b37b",
+    "oracle/md-rd/expected-findings.json": "9f8573876cbf2aed5d3bb959ab289f0c18db3699a189a2c521ec40e76fbdcb86",
+    "oracle/C0/expected-findings.json": "8447f7c9384d73dcca0a2a25facba8a64dd94d6bf75827fe6a3c86eb715ee76b",
+    "oracle/C1/expected-findings.json": "170f17b3148cef06c052889391be1cb1d33449640093d6ae5bf57eed279fda68",
+    "oracle/C2/expected-findings.json": "2eb7c0e854bf3d210daa1acb8d659b13d52b590dc9546f7e89e60e452cb39273",
+    "oracle/C0-to-C1/expected-delta.json": "f7826334cebcf34d413836d85e08a11fdfe584872cf5cc3b33b8db9dc58ee423",
+    "oracle/C1-to-C2/expected-delta.json": "928157e77ee67fc8d8d205f0ad2cb6eb185cf243925694db1c606ee721296ff3"
+  }
+}

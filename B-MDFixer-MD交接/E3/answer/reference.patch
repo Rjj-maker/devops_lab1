@@ -1,0 +1,12 @@
+diff --git "a/B-MDFixer-MD\344\272\244\346\216\245/E3/fixture/Makefile" "b/B-MDFixer-MD\344\272\244\346\216\245/E3/fixture/Makefile"
+--- "a/B-MDFixer-MD\344\272\244\346\216\245/E3/fixture/Makefile"
++++ "b/B-MDFixer-MD\344\272\244\346\216\245/E3/fixture/Makefile"
+@@ -8,7 +8,7 @@ all: app
+ app: main.o
+ 	$(CC) $(CFLAGS) -o $@ $^
+ 
+-main.o: main.c
++main.o: main.c config.h
+ 	$(CC) $(CFLAGS) -c -o $@ $<
+ 
+ clean:

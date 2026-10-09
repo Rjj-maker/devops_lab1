@@ -1,0 +1,31 @@
+{
+  "schema_version": "2.0",
+  "report_type": "ERROR_REPORT",
+  "producer_job_id": "job-e3-b2-oracle-001",
+  "repository": {
+    "url": "https://github.com/Rowan-hhh/devops_lab1.git",
+    "commit": "a98e84ca63d5869d7c29baba0817d249683a4ea1"
+  },
+  "configuration_id": "cc-c11-default",
+  "findings": [
+    {
+      "finding_id": "finding-e3-md-missing-config-h-001",
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "config.h",
+      "commit": "a98e84ca63d5869d7c29baba0817d249683a4ea1",
+      "location": {
+        "file": "B-MDFixer-MD交接/E3/fixture/Makefile",
+        "line": 11,
+        "column": 1
+      },
+      "evidence": {
+        "summary": "main.c includes and reads config.h, but the Makefile declares only main.c as a dependency of main.o.",
+        "process": "main.c includes config.h and uses VALUE; make clean && make builds main.o, then changing config.h to a newer modification time and running ordinary make leaves main.o unchanged because config.h is undeclared.",
+        "observed_file": "B-MDFixer-MD交接/E3/fixture/config.h",
+        "declaration_file": "B-MDFixer-MD交接/E3/fixture/Makefile"
+      },
+      "detector": "INSTRUCTOR_ORACLE"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-20260929T073452Z",
+  "generated_at": "2026-09-29T07:34:52.776266Z",
+  "project": "e3-draft-tiny-greeting@2026-09-06",
+  "git": {
+    "sha": "8c248c22f903dff80bda078a69296096787a9d9b",
+    "status": [
+      "?? \"A-B_DRAFT\\347\\216\\257\\345\\242\\203\\344\\272\\244\\346\\216\\245\\345\\214\\205/B1-DRAFT\\347\\216\\257\\345\\242\\203/\""
+    ],
+    "dirty": true
+  },
+  "host": {
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]"
+  },
+  "static_check": {
+    "status": "PASSED",
+    "checked_at": "2026-09-29T07:34:52.749559Z",
+    "checks": {
+      "project_id": true,
+      "project_root": true,
+      "build_command": true,
+      "build_exit_code": true,
+      "verify_command": true,
+      "verify_exit_code": true,
+      "verify_stdout": true
+    },
+    "source_sha256": {
+      "fixtures/draft/main.c": "88917357e65b1ae810b58838322c41e421c84491888dba71ae4f892ab4e6a078",
+      "fixtures/draft/Makefile": "3a2d049339599c7108ae63474efe16fd5c858a6ec0e82ab6cb48324283185b70",
+      "fixtures/draft/README.md": "56c1348c697912c7eb223a149cb3cae22017be1f7ef8d7852cd48098fcc5384d",
+      "fixtures/draft/interface.json": "7b1ef33ff72cafaf68f7e91ccd106f49b3378058a9e260aa1d5a242818040073",
+      "B1-DRAFT环境/Dockerfile.broken": "96292789c88bc22cfb6338a4b3518eddb08597c02a909abc1b54268f069fa949",
+      "B1-DRAFT环境/Dockerfile.reference": "2d67070a3fe7dbf0c41b0feae92d96dfea0f5ca6e9670ad3439a8ecb12a3da7d"
+    }
+  },
+  "expected": {
+    "broken_build_nonzero": true,
+    "reference_build_exit_code": 0,
+    "verify_exit_code": 0,
+    "verify_stdout": "hello E3\n"
+  },
+  "stages": {
+    "docker_version": {
+      "command": "/usr/bin/docker version",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-B_DRAFT环境交接包",
+      "started_at": "2026-09-29T07:34:53.035399Z",
+      "finished_at": "2026-09-29T07:34:53.269303Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "docker-version.stdout.log",
+      "stderr_log": "docker-version.stderr.log"
+    },
+    "broken_build": {
+      "command": "/usr/bin/docker build -f 'B1-DRAFT环境/Dockerfile.broken' -t e3-draft-tiny-greeting:broken .",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-B_DRAFT环境交接包",
+      "started_at": "2026-09-29T07:34:53.269420Z",
+      "finished_at": "2026-09-29T07:34:54.837991Z",
+      "exit_code": 127,
+      "timed_out": false,
+      "stdout_log": "broken-build.stdout.log",
+      "stderr_log": "broken-build.stderr.log",
+      "expected_failure_observed": true,
+      "expected_reason_observed": true
+    },
+    "reference_build": {
+      "command": "/usr/bin/docker build -f 'B1-DRAFT环境/Dockerfile.reference' -t e3-draft-tiny-greeting:reference .",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-B_DRAFT环境交接包",
+      "started_at": "2026-09-29T07:34:54.845553Z",
+      "finished_at": "2026-09-29T07:34:56.006901Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "reference-build.stdout.log",
+      "stderr_log": "reference-build.stderr.log"
+    },
+    "image_inspect": {
+      "command": "/usr/bin/docker image inspect e3-draft-tiny-greeting:reference",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-B_DRAFT环境交接包",
+      "started_at": "2026-09-29T07:34:56.006929Z",
+      "finished_at": "2026-09-29T07:34:56.187517Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "reference-image-inspect.stdout.log",
+      "stderr_log": "reference-image-inspect.stderr.log"
+    },
+    "compiler_version": {
+      "command": "/usr/bin/docker run --rm --network none --entrypoint gcc e3-draft-tiny-greeting:reference --version",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-B_DRAFT环境交接包",
+      "started_at": "2026-09-29T07:34:56.191466Z",
+      "finished_at": "2026-09-29T07:34:56.615689Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "reference-compiler-version.stdout.log",
+      "stderr_log": "reference-compiler-version.stderr.log"
+    },
+    "make_version": {
+      "command": "/usr/bin/docker run --rm --network none --entrypoint make e3-draft-tiny-greeting:reference --version",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-B_DRAFT环境交接包",
+      "started_at": "2026-09-29T07:34:56.615741Z",
+      "finished_at": "2026-09-29T07:34:56.998640Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "reference-make-version.stdout.log",
+      "stderr_log": "reference-make-version.stderr.log"
+    },
+    "artifact_check": {
+      "command": "/usr/bin/docker run --rm --network none --entrypoint /bin/sh e3-draft-tiny-greeting:reference -c 'test -x /work/hello && ls -l /work/hello'",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-B_DRAFT环境交接包",
+      "started_at": "2026-09-29T07:34:56.998670Z",
+      "finished_at": "2026-09-29T07:34:57.373307Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "reference-artifact-check.stdout.log",
+      "stderr_log": "reference-artifact-check.stderr.log",
+      "executable": true
+    },
+    "verify": {
+      "command": "/usr/bin/docker run --rm --network none e3-draft-tiny-greeting:reference",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-B_DRAFT环境交接包",
+      "started_at": "2026-09-29T07:34:57.373337Z",
+      "finished_at": "2026-09-29T07:34:57.743426Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "reference-verify.stdout.log",
+      "stderr_log": "reference-verify.stderr.log",
+      "stdout_exact_match": true
+    }
+  },
+  "image": {
+    "image_id": "sha256:71242bf070701f40c589820e4aadf74315ac1782fdb6bb5f72abdef49030803d",
+    "repo_tags": [
+      "e3-draft-tiny-greeting:reference"
+    ],
+    "repo_digests": [
+      "e3-draft-tiny-greeting@sha256:71242bf070701f40c589820e4aadf74315ac1782fdb6bb5f72abdef49030803d"
+    ],
+    "created": "2026-09-29T15:00:11.349949509+08:00",
+    "architecture": "amd64",
+    "os": "linux"
+  },
+  "result": "ACCEPTED"
+}

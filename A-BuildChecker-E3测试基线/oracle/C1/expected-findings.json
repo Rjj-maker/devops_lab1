@@ -1,0 +1,13 @@
+{
+  "provenance": "INSTRUCTOR_ORACLE",
+  "scope": "project-headers-of-main.o",
+  "system_headers_excluded": true,
+  "findings": [
+    {
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "feature.h",
+      "rationale": "C1 adds #include \"feature.h\" and uses FEATURE, but Makefile still declares main.o: main.c config.h."
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+cwd=/mnt/e/课程/Devops/devops_lab1/A-BuildChecker-E3测试基线/work/run-20261005T071837Z/C2-incremental
+command=make

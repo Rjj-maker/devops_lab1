@@ -1,0 +1,19 @@
+{
+  "target": "main.o",
+  "cflags": "-Wall -Wextra -std=c11",
+  "declared": [
+    "main.c",
+    "unused.h"
+  ],
+  "actual": [
+    "config.h",
+    "main.c"
+  ],
+  "missing": [
+    "config.h"
+  ],
+  "redundant": [
+    "unused.h"
+  ],
+  "location_line": 11
+}

@@ -40,6 +40,7 @@
 | 文件 | 说明 |
 |------|------|
 | `docs/environment-handoff.md` | A 组消费 DRAFT 环境的契约规则 |
+| `docs/B1-DRAFT环境验收.md` | A 组对 B1 样例环境、运行证据和交付可用性的交叉验收 |
 | `docs/instance-values.md` | 双方约定的真实实例值 |
 | `examples/full-check-create-request.example.json` | BuildChecker 创建请求（§7.1） |
 | `examples/full-check-create-receipt.example.json` | BuildChecker 202 创建回执（`CreateReceipt`） |
@@ -54,8 +55,11 @@
 | `ADR-001-async-job.md` | 异步 Job 架构决策记录 |
 | `ADR-002-artifact-storage-and-access.md` | Artifact URI、共享路径和读取核验方案 |
 | `E2_COMPLETION.md` | A 组 E2 交付状态、验证结果和未决事项 |
+| `个人工作说明.md` | pengyu-kong 的提交范围、校验结果和未完成项 |
 | `BACKLOG.md` | 任务 Backlog |
 | `AI_USAGE.md` | AI 使用记录 |
+| `../A-BuildChecker-E3测试基线/` | E3 BuildChecker 检测项目、人工预期、依赖图和运行证据 |
+| `../A-BuildChecker-E3测试基线/HANDOFF.md` | E3 BuildChecker 向 B3 / B2 及组内其他人的交接说明 |
 
 ## 使用边界
 

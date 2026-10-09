@@ -1,0 +1,2 @@
+cwd=/Users/zane/devops/devops_lab1/A-B_DRAFT环境交接包
+command=/opt/homebrew/bin/docker build -f 'B1-DRAFT环境/Dockerfile.reference' -t e3-draft-tiny-greeting:reference .

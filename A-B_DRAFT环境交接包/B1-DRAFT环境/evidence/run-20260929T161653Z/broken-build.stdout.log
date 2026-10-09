@@ -1,0 +1,16 @@
+Sending build context to Docker daemon    235kB
+
+Step 1/5 : FROM python:3.13-slim
+ ---> 7c61056e61ac
+Step 2/5 : WORKDIR /work
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in 9d0e0a096bf4
+ ---> Removed intermediate container 9d0e0a096bf4
+ ---> 7d253e4b18e8
+Step 3/5 : COPY fixtures/draft/main.c fixtures/draft/Makefile ./
+ ---> 765e5cff8523
+Step 4/5 : RUN make
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in ff16b147d98d
+[91m/bin/sh: 1: make: not found[0m[91m
+[0m

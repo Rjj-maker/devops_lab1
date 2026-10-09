@@ -1,0 +1,34 @@
+{
+  "project": {
+    "id": "e3-buildchecker-c1",
+    "version": "2026-09-10",
+    "version_label": "e3-buildchecker-c1@2026-09-10",
+    "project_root": "A-BuildChecker-E3测试基线/fixtures/commits/C1",
+    "platform": "linux",
+    "network_required": false
+  },
+  "inputs": ["main.c", "config.h", "feature.h", "Makefile", "README.md", "interface.json"],
+  "build": {
+    "command": "make",
+    "exit_code": 0,
+    "artifacts": [{"path": "app", "kind": "executable", "required": true}]
+  },
+  "verify": {
+    "command": "./app",
+    "exit_code": 0,
+    "stdout": "12\n",
+    "stdout_match": "exact",
+    "stderr_match": "record_only"
+  },
+  "configuration_id": "cc-MODE0",
+  "oracle": {
+    "scope": "project-headers-of-main.o",
+    "findings": [
+      {
+        "type": "MISSING",
+        "target": "main.o",
+        "dependency": "feature.h"
+      }
+    ]
+  }
+}
