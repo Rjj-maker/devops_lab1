@@ -1,0 +1,5 @@
+$ /usr/bin/python3 '/mnt/c/Users/zyh18/Documents/ChatGPT/Devops/.worktrees/b4-revalidation/B-重新验证/E3/tools/recheck_e3_candidate.py' --case c1 --workspace . --output b-evidence/recheck-report.json
+
+[stdout]
+
+[stderr]
