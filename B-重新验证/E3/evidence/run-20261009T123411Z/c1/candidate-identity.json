@@ -1,0 +1,12 @@
+{
+  "case": "c1",
+  "bundle_sha256": "716b515ea0e1ef4f2e8e82defab91f45492335b8de1515bbdc366bae915436f3",
+  "base_commit": "9c3e06606aa42afef25c53dbb5eb0c5a6330e5ea",
+  "candidate_commit": "d5d1d4a5a232094b1c2a5a74aadf3932b5ddedcf",
+  "candidate_parent": "9c3e06606aa42afef25c53dbb5eb0c5a6330e5ea",
+  "configuration_id": "cc-MODE0",
+  "selected_finding_id": "finding-e3-c1-missing-001",
+  "changed_files": [
+    "Makefile"
+  ]
+}

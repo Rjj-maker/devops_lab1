@@ -23,6 +23,7 @@
 | [`examples/revalidation-report-rejected.example.json`](examples/revalidation-report-rejected.example.json) | `REJECTED` 结构样例 |
 | [`tools/revalidate.py`](tools/revalidate.py) | Python 标准库验证器和命令行入口 |
 | [`tests/test_revalidate.py`](tests/test_revalidate.py) | 本地单元测试和失败路径测试 |
+| [`E3/`](E3/) | E3 两个 B2 candidate 的实际 B4 复查工具、证据和最终报告 |
 | [`AI_USAGE.md`](AI_USAGE.md) | AI 建议、人工取舍和验证记录 |
 
 ## 运行方式

@@ -1,0 +1,64 @@
+{
+  "schema_version": "2.0",
+  "case": "c1",
+  "target": "main.o",
+  "selected_finding_id": "finding-e3-c1-missing-001",
+  "declared_prerequisites": [
+    "config.h",
+    "feature.h",
+    "main.c"
+  ],
+  "actual_dependencies": [
+    "config.h",
+    "feature.h",
+    "main.c"
+  ],
+  "findings": [],
+  "remaining_selected_findings": [],
+  "incremental_probe": {
+    "passed": true,
+    "expected_stdout": "13\n",
+    "observed_stdout": "13\n",
+    "clean": {
+      "command": [
+        "make",
+        "clean"
+      ],
+      "exit_code": 0,
+      "stdout": "rm -f app main.o\n",
+      "stderr": ""
+    },
+    "build": {
+      "command": [
+        "make"
+      ],
+      "exit_code": 0,
+      "stdout": "cc -O0 -Wall -Wextra -std=c11 -c -o main.o main.c\ncc -O0 -Wall -Wextra -std=c11 -o app main.o\n",
+      "stderr": ""
+    },
+    "baseline": {
+      "command": [
+        "./app"
+      ],
+      "exit_code": 0,
+      "stdout": "12\n",
+      "stderr": ""
+    },
+    "incremental_make": {
+      "command": [
+        "make"
+      ],
+      "exit_code": 0,
+      "stdout": "cc -O0 -Wall -Wextra -std=c11 -c -o main.o main.c\ncc -O0 -Wall -Wextra -std=c11 -o app main.o\n",
+      "stderr": ""
+    },
+    "incremental_app": {
+      "command": [
+        "./app"
+      ],
+      "exit_code": 0,
+      "stdout": "13\n",
+      "stderr": ""
+    }
+  }
+}

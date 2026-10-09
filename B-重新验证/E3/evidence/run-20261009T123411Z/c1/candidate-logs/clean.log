@@ -1,0 +1,6 @@
+$ make clean
+
+[stdout]
+rm -f app main.o
+
+[stderr]
