@@ -1,0 +1,12 @@
+{
+  "case": "md-rd",
+  "bundle_sha256": "d600eb14082b4ba2113f3c39fff4fd74881426935fec9a14cd608e9753958c28",
+  "base_commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+  "candidate_commit": "37382e088e26b2827c3d9f7d4c5238d3d39d893f",
+  "candidate_parent": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+  "configuration_id": "cc-default",
+  "selected_finding_id": "finding-e3-md-rd-missing-001",
+  "changed_files": [
+    "Makefile"
+  ]
+}

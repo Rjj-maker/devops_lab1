@@ -1,0 +1,113 @@
+{
+  "scenario": "intentional-build-failure-then-makefile-restore",
+  "case": "md-rd",
+  "source_candidate_commit": "37382e088e26b2827c3d9f7d4c5238d3d39d893f",
+  "candidate_identity": {
+    "case": "md-rd",
+    "bundle_sha256": "d600eb14082b4ba2113f3c39fff4fd74881426935fec9a14cd608e9753958c28",
+    "base_commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+    "candidate_commit": "37382e088e26b2827c3d9f7d4c5238d3d39d893f",
+    "candidate_parent": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+    "configuration_id": "cc-default",
+    "selected_finding_id": "finding-e3-md-rd-missing-001",
+    "changed_files": [
+      "Makefile"
+    ]
+  },
+  "injected_change": {
+    "file": "Makefile",
+    "target": "e3-b4-intentional-build-failure",
+    "purpose": "negative probe only; not a B2 candidate Patch"
+  },
+  "rejected": {
+    "schema_version": "2.0",
+    "verification_status": "REJECTED",
+    "base_commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+    "candidate_commit": "37382e088e26b2827c3d9f7d4c5238d3d39d893f",
+    "configuration_id": "cc-default",
+    "finding_ids": [
+      "finding-e3-md-rd-missing-001"
+    ],
+    "validation": {
+      "clean": {
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 6,
+        "log_path": "b-evidence/clean.log"
+      },
+      "build": {
+        "success": false,
+        "exit_code": 2,
+        "duration_ms": 785,
+        "log_path": "b-evidence/build.log"
+      },
+      "test": {
+        "success": false,
+        "exit_code": null,
+        "duration_ms": 0,
+        "log_path": null,
+        "skipped": true,
+        "reason": "stopped after a previous stage failed"
+      },
+      "recheck": {
+        "success": false,
+        "exit_code": null,
+        "duration_ms": 0,
+        "log_path": null,
+        "skipped": true,
+        "reason": "stopped after a previous stage failed"
+      }
+    },
+    "remaining_selected_findings": [],
+    "error": {
+      "code": "REPAIR_3001",
+      "message": "build exited with code 2",
+      "stage": "build"
+    },
+    "generated_at": "2026-10-10T06:08:00.447990Z"
+  },
+  "restore": {
+    "original_makefile_sha256": "d4c1f668950edf7cab85ed06529a4c9c12e48639cc75ade0ecb1e362390beb4d",
+    "restored_makefile_sha256": "d4c1f668950edf7cab85ed06529a4c9c12e48639cc75ade0ecb1e362390beb4d",
+    "makefile_sha256_matches_original": true
+  },
+  "recovered": {
+    "schema_version": "2.0",
+    "verification_status": "ACCEPTED",
+    "base_commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+    "candidate_commit": "37382e088e26b2827c3d9f7d4c5238d3d39d893f",
+    "configuration_id": "cc-default",
+    "finding_ids": [
+      "finding-e3-md-rd-missing-001"
+    ],
+    "validation": {
+      "clean": {
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 4,
+        "log_path": "b-evidence/clean.log"
+      },
+      "build": {
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 783,
+        "log_path": "b-evidence/build.log"
+      },
+      "test": {
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 3,
+        "log_path": "b-evidence/test.log"
+      },
+      "recheck": {
+        "success": true,
+        "exit_code": 0,
+        "duration_ms": 1858,
+        "log_path": "b-evidence/recheck.log"
+      }
+    },
+    "remaining_selected_findings": [],
+    "error": null,
+    "generated_at": "2026-10-10T06:08:02.008307Z"
+  }
+}

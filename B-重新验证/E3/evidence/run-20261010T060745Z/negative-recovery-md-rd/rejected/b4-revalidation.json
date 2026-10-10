@@ -1,0 +1,47 @@
+{
+  "schema_version": "2.0",
+  "verification_status": "REJECTED",
+  "base_commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+  "candidate_commit": "37382e088e26b2827c3d9f7d4c5238d3d39d893f",
+  "configuration_id": "cc-default",
+  "finding_ids": [
+    "finding-e3-md-rd-missing-001"
+  ],
+  "validation": {
+    "clean": {
+      "success": true,
+      "exit_code": 0,
+      "duration_ms": 6,
+      "log_path": "b-evidence/clean.log"
+    },
+    "build": {
+      "success": false,
+      "exit_code": 2,
+      "duration_ms": 785,
+      "log_path": "b-evidence/build.log"
+    },
+    "test": {
+      "success": false,
+      "exit_code": null,
+      "duration_ms": 0,
+      "log_path": null,
+      "skipped": true,
+      "reason": "stopped after a previous stage failed"
+    },
+    "recheck": {
+      "success": false,
+      "exit_code": null,
+      "duration_ms": 0,
+      "log_path": null,
+      "skipped": true,
+      "reason": "stopped after a previous stage failed"
+    }
+  },
+  "remaining_selected_findings": [],
+  "error": {
+    "code": "REPAIR_3001",
+    "message": "build exited with code 2",
+    "stage": "build"
+  },
+  "generated_at": "2026-10-10T06:08:00.447990Z"
+}

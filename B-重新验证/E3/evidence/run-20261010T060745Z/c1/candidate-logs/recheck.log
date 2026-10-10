@@ -1,0 +1,5 @@
+$ python3 b-evidence/recheck_e3_candidate.py --case c1 --workspace . --output b-evidence/recheck-report.json
+
+[stdout]
+
+[stderr]

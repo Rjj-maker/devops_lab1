@@ -1,0 +1,9 @@
+$ make
+
+[stdout]
+cc -Wall -Wextra -std=c11 -c -o main.o main.c
+cc -Wall -Wextra -std=c11 -o app main.o
+E3 intentional invalid-candidate probe
+
+[stderr]
+make: *** [Makefile:23: e3-b4-intentional-build-failure] Error 1
