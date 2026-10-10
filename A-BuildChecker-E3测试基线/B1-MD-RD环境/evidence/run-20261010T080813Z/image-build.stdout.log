@@ -1,0 +1,31 @@
+Sending build context to Docker daemon  9.775kB
+
+Step 1/8 : FROM debian:bookworm-slim
+ ---> 3783cc01769c
+Step 2/8 : ARG DEBIAN_FRONTEND=noninteractive
+ ---> Using cache
+ ---> 594251a972ef
+Step 3/8 : RUN apt-get update     && apt-get install -y --no-install-recommends         gcc         make         libc6-dev     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> 8cf39bf2f08b
+Step 4/8 : WORKDIR /work
+ ---> Using cache
+ ---> 61538d1221da
+Step 5/8 : COPY main.c      config.h      unused.h      Makefile      README.md      interface.json      ./
+ ---> 00aee01aaba6
+Step 6/8 : RUN make     && test -x ./app
+ ---> Running in 103402f0abe6
+cc -Wall -Wextra -std=c11 -c -o main.o main.c
+cc -Wall -Wextra -std=c11 -o app main.o
+ ---> Removed intermediate container 103402f0abe6
+ ---> 86dc7e5f8225
+Step 7/8 : LABEL org.opencontainers.image.title="E3 BuildChecker MD/RD environment"       org.opencontainers.image.source="https://github.com/Rowan-hhh/devops_lab1"       org.opencontainers.image.revision="29c02d6604d7071d4b249ec958dd8a553caa670a"       dev.devops-lab.project="e3-buildchecker-md-rd@2026-09-10"
+ ---> Running in 3875e112025e
+ ---> Removed intermediate container 3875e112025e
+ ---> 8208a251d203
+Step 8/8 : CMD ["./app"]
+ ---> Running in f6d54989d1e9
+ ---> Removed intermediate container f6d54989d1e9
+ ---> 5be5d74a921c
+Successfully built 5be5d74a921c
+Successfully tagged e3-buildchecker-md-rd:b1-20260910

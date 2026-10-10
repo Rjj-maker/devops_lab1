@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "validated_at": "2026-10-10T17:39:20+08:00",
+  "archive": {
+    "file": "../e3-buildchecker-md-rd.tar",
+    "sha256_windows": "02ee7f60fccf2392d1895e1cee616d31ba05488faab83e1c76ee07121e6e5681",
+    "sha256_wsl": "02ee7f60fccf2392d1895e1cee616d31ba05488faab83e1c76ee07121e6e5681",
+    "hash_match": true
+  },
+  "docker_load": {
+    "exit_code": 0,
+    "loaded_tag": "e3-buildchecker-md-rd:b1-20260910",
+    "image_id": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6"
+  },
+  "offline_run": {
+    "command": "docker run --rm --network none e3-buildchecker-md-rd:b1-20260910",
+    "exit_code": 0,
+    "stdout": "1\n"
+  },
+  "result": "ACCEPTED"
+}

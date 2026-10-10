@@ -99,9 +99,11 @@ B1 现有 Tiny Greeting（`make` / `./hello` / `hello E3`）和本检测项目**
 - GNU Make + C 编译器
 - 构建和验证不需要网络
 
-在为本 MD/RD 与 C0/C1/C2 提供 Dockerfile、`image_ref`、源码 SHA 和构建日志之前，BuildChecker 基线只在 WSL2 Ubuntu（Make 4.3、cc 13.3.0）上验证过。步骤②仍由你们对接 B1。
+本基线已补入 [`B1-MD-RD环境/`](B1-MD-RD环境/)：Dockerfile 直接复制 `fixtures/md-rd` 的六个输入文件，验收脚本检查基本运行、MD stale/clean rebuild 和 RD 触发重编译。它还可以导出 Docker image tar，并生成含 image ID、tar SHA-256 和接收端命令的 `transfer-manifest.json`。
 
-**请回：** 是否为本检测项目单独出环境，以及镜像如何让 A 组按 digest 取得。
+当前有效运行为 [`B1-MD-RD环境/evidence/run-20261010T080813Z/`](B1-MD-RD环境/evidence/run-20261010T080813Z/)，结果为 `ACCEPTED`。镜像身份、tar SHA-256 和本机验收结果见 [`evidence/FINAL_RESULT.md`](B1-MD-RD环境/evidence/FINAL_RESULT.md)。A 组接收机回载与断网运行回执仍需在对方机器上完成。Registry 共享时应用 push 后的 `repo@sha256:...` 作为 `image_ref`。
+
+**请回：** 是否已在 Docker 机器上得到 `ACCEPTED`；向 A 组提供 `transfer-manifest.json` 和镜像 tar，或提供 Registry `repo@sha256:...`。
 
 ## 6. 给 A 组检测/复核负责人 / B4
 

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-10T08:08:35.856242Z",
+  "project": "e3-buildchecker-md-rd@2026-09-10",
+  "source_baseline_commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+  "image_tag": "e3-buildchecker-md-rd:b1-20260910",
+  "image_id": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+  "repo_digests": [
+    "e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6"
+  ],
+  "archive": {
+    "file": "e3-buildchecker-md-rd.tar",
+    "size_bytes": 98049024,
+    "sha256": "02ee7f60fccf2392d1895e1cee616d31ba05488faab83e1c76ee07121e6e5681"
+  },
+  "import_command": "docker load --input e3-buildchecker-md-rd.tar",
+  "verify_command": "docker run --rm --network none e3-buildchecker-md-rd:b1-20260910",
+  "expected_stdout": "1\n"
+}

@@ -1,0 +1,212 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-20261010T080813Z",
+  "generated_at": "2026-10-10T08:08:13.432097Z",
+  "project": "e3-buildchecker-md-rd@2026-09-10",
+  "source_baseline_commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+  "git": {
+    "sha": "78eb4cd45cb3e22b894cd7b2b8f3b98b7e9a7a32",
+    "status": [
+      " M .gitignore",
+      " M \"A-BuildChecker-E3\\346\\265\\213\\350\\257\\225\\345\\237\\272\\347\\272\\277/HANDOFF.md\"",
+      " M \"A-BuildChecker-E3\\346\\265\\213\\350\\257\\225\\345\\237\\272\\347\\272\\277/README.md\"",
+      "?? \"A-BuildChecker-E3\\346\\265\\213\\350\\257\\225\\345\\237\\272\\347\\272\\277/B1-MD-RD\\347\\216\\257\\345\\242\\203/\""
+    ],
+    "dirty": true
+  },
+  "host": {
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "machine": "x86_64",
+    "python": "3.12.3 (main, Jun 19 2026, 12:46:00) [GCC 13.3.0]"
+  },
+  "static_check": {
+    "status": "PASSED",
+    "checked_at": "2026-10-10T08:08:13.364232Z",
+    "source_baseline_commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+    "source_matches_baseline_commit": true,
+    "checks": {
+      "project_id": true,
+      "project_root": true,
+      "platform": true,
+      "network_not_required": true,
+      "build_command": true,
+      "build_exit_code": true,
+      "verify_command": true,
+      "verify_exit_code": true,
+      "verify_stdout": true,
+      "dockerfile_copies_fixed_source_set": true
+    },
+    "source_sha256": {
+      "fixtures/md-rd/main.c": "0395bae2ba01c52acaa2aeffc38af76cc6336658feb0d3262111442ce25cd945",
+      "fixtures/md-rd/config.h": "61a4776ceccdaefa6bfa12723b491697b9a52ca6659ea2b5a4a5244ab6078108",
+      "fixtures/md-rd/unused.h": "8f0a07234431448d50ab7101caa07719ecb7497719710714c5572c072443f467",
+      "fixtures/md-rd/Makefile": "46ce501df9dd5e0fcfb142322e678a2ada3e757542304a09f556e56130a0a343",
+      "fixtures/md-rd/README.md": "19ef5f57482245931dced1b55091f27c1220b40c7363a8178677cdc58bf9886d",
+      "fixtures/md-rd/interface.json": "243cdc8f58fecfbf476ae680f8a938d7ebdc0a8dabbc8c4dda1116dfb8ff2627",
+      "B1-MD-RD环境/Dockerfile": "f3f5e68c191895073b770a1cfda4d3cc5309f91176396d0146b1fa9da3dc030a"
+    }
+  },
+  "expected": {
+    "verify_stdout": "1\n",
+    "md_stale_output": "1",
+    "md_clean_rebuild_output": "2",
+    "rd_change_recompiles_main": true
+  },
+  "stages": {
+    "docker_version": {
+      "command": "/usr/bin/docker version",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:16.607434Z",
+      "finished_at": "2026-10-10T08:08:17.142650Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "docker-version.stdout.log",
+      "stderr_log": "docker-version.stderr.log"
+    },
+    "image_build": {
+      "command": "/usr/bin/docker build -f 'B1-MD-RD环境/Dockerfile' -t e3-buildchecker-md-rd:b1-20260910 fixtures/md-rd",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:17.142914Z",
+      "finished_at": "2026-10-10T08:08:24.025060Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "image-build.stdout.log",
+      "stderr_log": "image-build.stderr.log"
+    },
+    "image_inspect": {
+      "command": "/usr/bin/docker image inspect e3-buildchecker-md-rd:b1-20260910",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:24.025105Z",
+      "finished_at": "2026-10-10T08:08:24.349489Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "image-inspect.stdout.log",
+      "stderr_log": "image-inspect.stderr.log"
+    },
+    "verify": {
+      "command": "/usr/bin/docker run --rm --network none e3-buildchecker-md-rd:b1-20260910",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:24.355893Z",
+      "finished_at": "2026-10-10T08:08:25.083993Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "verify.stdout.log",
+      "stderr_log": "verify.stderr.log",
+      "stdout_exact_match": true
+    },
+    "compiler_version": {
+      "command": "/usr/bin/docker run --rm --network none --entrypoint /bin/sh e3-buildchecker-md-rd:b1-20260910 -c 'gcc --version'",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:25.084028Z",
+      "finished_at": "2026-10-10T08:08:25.755835Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "compiler_version.stdout.log",
+      "stderr_log": "compiler_version.stderr.log"
+    },
+    "make_version": {
+      "command": "/usr/bin/docker run --rm --network none --entrypoint /bin/sh e3-buildchecker-md-rd:b1-20260910 -c 'make --version'",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:25.755869Z",
+      "finished_at": "2026-10-10T08:08:26.404322Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "make_version.stdout.log",
+      "stderr_log": "make_version.stderr.log"
+    },
+    "source_check": {
+      "command": "/usr/bin/docker run --rm --network none --entrypoint /bin/sh e3-buildchecker-md-rd:b1-20260910 -c 'test -x /work/app && test -f /work/main.c && test -f /work/config.h && test -f /work/unused.h && test -f /work/Makefile'",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:26.404356Z",
+      "finished_at": "2026-10-10T08:08:27.139212Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "source_check.stdout.log",
+      "stderr_log": "source_check.stderr.log"
+    },
+    "md_stale": {
+      "command": "/usr/bin/docker run --rm --network none --entrypoint /bin/sh e3-buildchecker-md-rd:b1-20260910 -c 'sed -i '\"'\"'s/#define VALUE 1/#define VALUE 2/'\"'\"' config.h && make && ./app'",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:27.139249Z",
+      "finished_at": "2026-10-10T08:08:27.990610Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "md_stale.stdout.log",
+      "stderr_log": "md_stale.stderr.log",
+      "observed_output": "1",
+      "main_recompiled": false
+    },
+    "md_clean_rebuild": {
+      "command": "/usr/bin/docker run --rm --network none --entrypoint /bin/sh e3-buildchecker-md-rd:b1-20260910 -c 'sed -i '\"'\"'s/#define VALUE 1/#define VALUE 2/'\"'\"' config.h && make clean && make && ./app'",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:27.990646Z",
+      "finished_at": "2026-10-10T08:08:28.833308Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "md_clean_rebuild.stdout.log",
+      "stderr_log": "md_clean_rebuild.stderr.log",
+      "observed_output": "2",
+      "main_recompiled": true
+    },
+    "rd_rebuild": {
+      "command": "/usr/bin/docker run --rm --network none --entrypoint /bin/sh e3-buildchecker-md-rd:b1-20260910 -c 'sleep 1 && touch unused.h && make && ./app'",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:28.833343Z",
+      "finished_at": "2026-10-10T08:08:30.637668Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "rd_rebuild.stdout.log",
+      "stderr_log": "rd_rebuild.stderr.log",
+      "observed_output": "1",
+      "main_recompiled": true
+    },
+    "image_export": {
+      "command": "/usr/bin/docker image save --output '/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线/B1-MD-RD环境/evidence/e3-buildchecker-md-rd.tar' e3-buildchecker-md-rd:b1-20260910",
+      "working_directory": "/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线",
+      "started_at": "2026-10-10T08:08:30.693451Z",
+      "finished_at": "2026-10-10T08:08:34.685550Z",
+      "exit_code": 0,
+      "timed_out": false,
+      "stdout_log": "image-export.stdout.log",
+      "stderr_log": "image-export.stderr.log"
+    }
+  },
+  "image": {
+    "image_id": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+    "repo_tags": [
+      "e3-buildchecker-md-rd:b1-20260910"
+    ],
+    "repo_digests": [
+      "e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6"
+    ],
+    "created": "2026-10-10T16:08:23.870793198+08:00",
+    "architecture": "amd64",
+    "os": "linux",
+    "labels": {
+      "dev.devops-lab.project": "e3-buildchecker-md-rd@2026-09-10",
+      "org.opencontainers.image.revision": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+      "org.opencontainers.image.source": "https://github.com/Rowan-hhh/devops_lab1",
+      "org.opencontainers.image.title": "E3 BuildChecker MD/RD environment"
+    }
+  },
+  "transfer": {
+    "schema_version": "1.0",
+    "generated_at": "2026-10-10T08:08:35.856242Z",
+    "project": "e3-buildchecker-md-rd@2026-09-10",
+    "source_baseline_commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+    "image_tag": "e3-buildchecker-md-rd:b1-20260910",
+    "image_id": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+    "repo_digests": [
+      "e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6"
+    ],
+    "archive": {
+      "file": "e3-buildchecker-md-rd.tar",
+      "size_bytes": 98049024,
+      "sha256": "02ee7f60fccf2392d1895e1cee616d31ba05488faab83e1c76ee07121e6e5681"
+    },
+    "import_command": "docker load --input e3-buildchecker-md-rd.tar",
+    "verify_command": "docker run --rm --network none e3-buildchecker-md-rd:b1-20260910",
+    "expected_stdout": "1\n"
+  },
+  "result": "ACCEPTED"
+}

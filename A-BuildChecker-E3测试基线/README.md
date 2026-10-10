@@ -35,6 +35,7 @@ E3 只准备可判断对错的项目、人工预期、命令和实际观察。�
 | `fixtures/commits/C0` `C1` `C2` | 三个版本快照 |
 | `oracle/` | `INSTRUCTOR_ORACLE` 预期发现和增量差 |
 | `scripts/run_a_buildchecker.py` | 静态检查、行为实验、构图和写报告 |
+| `B1-MD-RD环境/` | 基于 `fixtures/md-rd` 的专用 Docker 环境、验收脚本与跨机器导出说明 |
 | `evidence/` | 实际命令、退出码、图、报告、提交 bundle |
 
 ## 3. 输入检查
@@ -82,8 +83,12 @@ python3 A-BuildChecker-E3测试基线/scripts/run_a_buildchecker.py
 
 发给对方时用 [`HANDOFF.md`](HANDOFF.md)，按角色读对应小节即可。
 
-## 7. 给 B 组的边界
+## 7. B1 MD/RD 专用环境
+
+B1 环境包见 [`B1-MD-RD环境/README.md`](B1-MD-RD环境/README.md)。它使用本基线的 `fixtures/md-rd` 源码，可验证 `make` / `./app` 以及 MD stale/clean rebuild 和 RD 触发重编译行为。脚本可导出带 SHA-256 交付清单的 Docker image tar，用于 A 组跨机器复验。
+
+## 8. 给 B 组的边界
 
 - **B3**：按 `docs/a1-interface.md` 和各项目 README 确认 DRAFT 能取得并运行这些项目。
 - **B2**：接收完整 ERROR_REPORT，只选 `MISSING`。RD 必须保留在报告里，不要交给修复器当输入。
-- **B1 镜像**：Tiny Greeting 与本检测项目不是同一份源码，不能填进本项目的 `image_ref`。
+- **B1 镜像**：本项目必须使用 `B1-MD-RD环境/` 生成的镜像身份；Tiny Greeting 的 `image_ref` 仍不能用于本项目。

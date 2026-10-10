@@ -1,0 +1,3 @@
+cc -Wall -Wextra -std=c11 -c -o main.o main.c
+cc -Wall -Wextra -std=c11 -o app main.o
+1

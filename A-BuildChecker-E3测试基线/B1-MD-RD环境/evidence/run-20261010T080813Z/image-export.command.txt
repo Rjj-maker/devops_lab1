@@ -1,0 +1,2 @@
+cwd=/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线
+command=/usr/bin/docker image save --output '/mnt/e/dasanshang/Devops/项目/devops_lab1/A-BuildChecker-E3测试基线/B1-MD-RD环境/evidence/e3-buildchecker-md-rd.tar' e3-buildchecker-md-rd:b1-20260910
