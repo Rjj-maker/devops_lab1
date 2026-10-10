@@ -69,4 +69,8 @@ docker image inspect e3-buildchecker-md-rd:b1-20260910
 docker run --rm --network none e3-buildchecker-md-rd:b1-20260910
 ```
 
-预期最后一条命令退出码为 `0`，标准输出为 `1` 加换行。本地 `docker save` 交付使用 image ID 和 tar SHA-256 识别；如后续改用 Registry，应以 push 后返回的 `repo@sha256:...` 作为跨机器 `image_ref`。
+预期最后一条命令退出码为 `0`，标准输出为 `1` 加换行。本地 `docker save` 交付使用 image ID 和 tar SHA-256 识别；Registry 交付使用 push 后返回的 `repo@sha256:...` 作为跨机器 `image_ref`。
+
+## GHCR 接收验收
+
+B1 已将镜像发布到 GHCR。A 组已按 `ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6` 拉取镜像，并核对 Registry digest、Image ID、源码 revision 和 `linux/amd64` 平台。A 组接收端断网运行 `./app`、MD stale/clean rebuild 和 RD rebuild 检查全部通过。正式接收回执和日志见 [`A 组 GHCR 接收记录`](../evidence/run-20261010T160627Z-ghcr/A_CROSS_MACHINE_RECEIPT.md)。

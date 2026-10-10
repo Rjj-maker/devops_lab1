@@ -3,10 +3,10 @@
 **交出方：** A 组 BuildChecker 负责人  
 **仓库：** https://github.com/Rowan-hhh/devops_lab1  
 **目录：** `A-BuildChecker-E3测试基线/`  
-**本地提交：** `b7116cd`（`feat(E3/A): add BuildChecker MD/RD baseline and full-check reports`）。若尚未出现在 `origin/main`，先 `git pull` 再确认该 SHA。  
+**基线提交：** `b7116cd`（`feat(E3/A): add BuildChecker MD/RD baseline and full-check reports`），已包含在当前 `main` 历史中。
 **分工依据：** `docs/E3A组分工.png`
 
-本文只交接 **① 检测项目与 README**、**③ 全量检测与 MD/RD 报告**。请按自己的角色读对应小节，读完后用文末表格回一条确认。
+本文交接 **① 检测项目与 README**、**③ 全量检测与 MD/RD 报告**，并记录环境负责人完成的 **② MD/RD 专用环境消费与 GHCR 接收验收**。④ Patch 复核与⑤最终双方交换继续由对应角色跟踪。请按自己的角色阅读相应小节并更新文末回执。
 
 ## 1. 请先看哪份文件
 
@@ -14,11 +14,11 @@
 | --- | --- | --- |
 | B3 接口与 README | 第 3 节 + [`docs/a1-interface.md`](docs/a1-interface.md) | 确认 DRAFT 能按同一 README 取得并运行项目 |
 | B2 MDFixer | 第 4 节 + [`handoff/b2/`](handoff/b2/) | 收下完整报告，只选 `MISSING` 做修复 |
-| A 组环境负责人 / B1 | 第 5 节 | 为本检测项目准备环境，不要用 Tiny Greeting 镜像冒充 |
+| A 组环境负责人 / B1 | 第 5 节 | 核对 MD/RD 专用环境交付和 GHCR 接收记录；E3-07 已验收通过 |
 | A 组检测/复核 / B4 | 第 6 节 | 等候选 Patch 后核对 MD 是否消失、RD 是否仍在 |
 | A 组交付负责人 | 第 7 节 | 最终整理时用本文和有效运行目录 |
 
-公共入口：[`README.md`](README.md)。有效运行：[`evidence/run-20261005T071837Z/`](evidence/run-20261005T071837Z/)，结果 `ACCEPTED`。
+公共入口：[`README.md`](README.md)。当前 canonical-main MD/RD 运行：[`evidence/run-20261010T051714Z/`](evidence/run-20261010T051714Z/)，结果 `ACCEPTED`；原始 WSL2/standalone-snapshot 运行 `run-20261005T071837Z/` 保留历史与 strace 证据。
 
 ## 2. BuildChecker 已经交出什么
 
@@ -28,7 +28,7 @@
 | C0 / C1 / C2 快照 | `fixtures/commits/` | 声明正确 → 新增 include 未补 Makefile → 只改 `-DMODE=7` |
 | 构建 / 验证 | `make` / `./app` | Linux、GNU Make、C 编译器；不需要网络 |
 | 人工预期 | `oracle/`、`docs/md-rd-oracle.md` | `detector` 为 `INSTRUCTOR_ORACLE` |
-| 实际图 / 声明图 / ERROR_REPORT | `evidence/run-20261005T071837Z/` 与 `handoff/b2/` | 范围：`main.o` 的项目头文件 |
+| 实际图 / 声明图 / ERROR_REPORT | canonical-main：`evidence/run-20261010T051714Z/`；B2 已接收版本：`handoff/b2/` | 范围：`main.o` 的项目头文件 |
 | 可复现提交 | `evidence/run-20261005T071837Z/commits/*.sha` 与 `commits.bundle` | 不是 GitHub `main` 上的三个独立 commit |
 | 重跑脚本 | `scripts/run_a_buildchecker.py` | 在仓库根目录执行 |
 
@@ -71,7 +71,7 @@ DRAFT 请求字段对应：`build_command=make`，`test_command=./app`。`make c
 
 ## 4. 给 B2：完整报告，只修 MISSING
 
-请从 [`handoff/b2/`](handoff/b2/) 取当前有效副本（与 `run-20261005T071837Z` 一致）。
+已提交给 B2 的 [`handoff/b2/`](handoff/b2/) 保持基于原 standalone snapshot `39430e3cdcf16403eec63bf592129b50ab1ff53d`，以免覆盖 B2/B4 已建立的 candidate base。方法2 canonical-main 重跑的报告位于 `evidence/run-20261010T051714Z/md-rd/artifacts/`，其 commit 是 `29c02d6604d7071d4b249ec958dd8a553caa670a`。两个报告的项目文件内容一致，但 commit identity 不同。B2 若改用 canonical-main 报告，必须把参考 Patch / candidate base 和 B4 revalidation 一并切换到新的 commit，不能混用两套记录。
 
 | 文件 | 内容 | 请选择 |
 | --- | --- | --- |
@@ -99,11 +99,11 @@ B1 现有 Tiny Greeting（`make` / `./hello` / `hello E3`）和本检测项目**
 - GNU Make + C 编译器
 - 构建和验证不需要网络
 
-本基线已补入 [`B1-MD-RD环境/`](B1-MD-RD环境/)：Dockerfile 直接复制 `fixtures/md-rd` 的六个输入文件，验收脚本检查基本运行、MD stale/clean rebuild 和 RD 触发重编译。它还可以导出 Docker image tar，并生成含 image ID、tar SHA-256 和接收端命令的 `transfer-manifest.json`。
+方法2已基于可远端 clone 的提交 `29c02d6604d7071d4b249ec958dd8a553caa670a` 重跑 MD/RD 基线，并用该 commit 生成 `actual.json`、`declared.json` 和 `ERROR_REPORT`。项目路径为 `A-BuildChecker-E3测试基线/fixtures/md-rd`，构建和验证命令为 `make` / `./app`。
 
-当前有效运行为 [`B1-MD-RD环境/evidence/run-20261010T080813Z/`](B1-MD-RD环境/evidence/run-20261010T080813Z/)，结果为 `ACCEPTED`。镜像身份、tar SHA-256 和本机验收结果见 [`evidence/FINAL_RESULT.md`](B1-MD-RD环境/evidence/FINAL_RESULT.md)。A 组接收机回载与断网运行回执仍需在对方机器上完成。Registry 共享时应用 push 后的 `repo@sha256:...` 作为 `image_ref`。
+B1 已在提交 `fa07b7199e985b1dda63cc2efa467e5eb5a0f0ee` 增加 MD/RD 专用 Dockerfile、`run_b1_md_rd.py` 和本机验收证据。Dockerfile 直接复制 MD/RD 项目的六个输入文件；B1 本机运行 `run-20261010T080813Z` 结果为 `ACCEPTED`，并导出带 tar SHA-256 清单的镜像归档，详见 [`B1-MD-RD环境/evidence/FINAL_RESULT.md`](B1-MD-RD环境/evidence/FINAL_RESULT.md)。
 
-**请回：** 是否已在 Docker 机器上得到 `ACCEPTED`；向 A 组提供 `transfer-manifest.json` 和镜像 tar，或提供 Registry `repo@sha256:...`。
+A 组已从 GHCR 拉取并验收 B1 原始镜像，固定 `image_ref` 为 `ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6`。接收端 RepoDigest、Image ID、源码 revision 与 `linux/amd64` 平台均与 B1 交付记录一致。断网运行 `./app` 输出 `1\n`；MD stale/clean rebuild 和 RD rebuild 均通过。A 组接收结果为 `ACCEPTED`，完整记录见 [`evidence/run-20261010T160627Z-ghcr/A_CROSS_MACHINE_RECEIPT.md`](evidence/run-20261010T160627Z-ghcr/A_CROSS_MACHINE_RECEIPT.md) 及同目录 `summary.json`。E3-07 环境交付和 Registry 接收验收完成；E3 不要求部署 DRAFT API。
 
 ## 6. 给 A 组检测/复核负责人 / B4
 
@@ -123,7 +123,10 @@ C2 的 `12` vs `19` 用来核对命令变化，不要当成一条新的 MISSING�
 最终整理时请带上：
 
 - 本文和 [`README.md`](README.md)
-- 有效运行 `evidence/run-20261005T071837Z/`（`summary.json` 为 `ACCEPTED`）
+- canonical-main 有效运行 `evidence/run-20261010T051714Z/`（`summary.json` 为 `ACCEPTED`）
+- B1-base MD/RD 本地环境复核 `evidence/run-20261010T043534Z-md-rd-main-29c02/`（`ACCEPTED_LOCAL`，非 B1 API Job）
+- B1 GHCR 镜像接收验收 `evidence/run-20261010T160627Z-ghcr/`（固定 digest 拉取、镜像身份核对和 MD/RD 断网复测均为 `ACCEPTED`）
+- 原始 WSL2 运行 `evidence/run-20261005T071837Z/`（保留 strace 与 standalone snapshot 证据）
 - C0/C1/C2 SHA 与 `commits.bundle`
 - 人工预期 `oracle/` 与实际日志的对照（[`validation.md`](validation.md)、[`evidence/FINAL_RESULT.md`](evidence/FINAL_RESULT.md)）
 - B3 / B2 / B1 / B4 的确认或差异说明
@@ -143,7 +146,7 @@ Windows 请用 WSL。脚本每次写新的 `evidence/run-*`，不覆盖旧记录
 | --- | --- |
 | B3 | 已按 README 跑通 / 不能跑通（附命令和退出码） |
 | B2 | 已接收 `finding-e3-md-rd-missing-001` 和/或 `finding-e3-c1-missing-001`，不处理 RD |
-| 环境 / B1 | 将为本项目提供镜像 / 暂不提供（原因） |
+| 环境 / B1 | A 组已按 GHCR digest 拉取 B1 原始镜像，并核对镜像身份、源码基线和断网行为；回执见 `evidence/run-20261010T160627Z-ghcr/` |
 | 复核 / B4 | 尚未开始 / 已复核（MD 消除与否） |
 | 交付 | 已纳入 E3 最终包 |
 

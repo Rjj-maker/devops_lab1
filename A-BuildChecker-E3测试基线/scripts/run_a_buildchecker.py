@@ -20,7 +20,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -497,20 +497,27 @@ def record_versions(evidence_dir: Path) -> dict[str, Any]:
     return versions
 
 
-def run_md_rd(work_root: Path, evidence_dir: Path) -> dict[str, Any]:
+def run_md_rd(
+    work_root: Path, evidence_dir: Path, report_commit: Optional[str] = None
+) -> dict[str, Any]:
     work = work_root / "md-rd"
     copy_tree_lf(FIXTURES / "md-rd", work)
     logs = evidence_dir / "md-rd"
     logs.mkdir(parents=True, exist_ok=True)
     md_repo = work_root / "md-rd-repo"
     init_git_repo(md_repo)
-    commit = commit_snapshot(
+    snapshot_commit = commit_snapshot(
         md_repo,
         FIXTURES / "md-rd",
         "md-rd: missing config.h and redundant unused.h",
         "md-rd",
     )
-    (logs / "md-rd.sha").write_text(commit + "\n", encoding="utf-8")
+    # The generated bundle commit is useful for isolated B2 reproduction, but it
+    # is not fetchable from the shared repository. E3 environment-binding runs
+    # may publish analysis artifacts against the ordinary repository commit.
+    commit = report_commit or snapshot_commit
+    (logs / "md-rd.sha").write_text(snapshot_commit + "\n", encoding="utf-8")
+    (logs / "repository-commit.sha").write_text(commit + "\n", encoding="utf-8")
     subprocess.run(
         ["git", "bundle", "create", str((logs / "md-rd.bundle").resolve()), "--all"],
         cwd=md_repo,
@@ -548,9 +555,14 @@ def run_md_rd(work_root: Path, evidence_dir: Path) -> dict[str, Any]:
     rd_make = run_and_record("rd-incremental", ["make"], work, logs)
 
     analysis = analyze_project(FIXTURES / "md-rd")
+    analysis_job_id = (
+        "job-e3-a-md-rd-001"
+        if report_commit is None
+        else f"job-e3-a-md-rd-{report_commit[:8]}"
+    )
     artifacts = write_analysis_artifacts(
         logs / "artifacts",
-        "job-e3-a-md-rd-001",
+        analysis_job_id,
         commit,
         "cc-default",
         analysis,
@@ -589,6 +601,7 @@ def run_md_rd(work_root: Path, evidence_dir: Path) -> dict[str, Any]:
     }
     return {
         "commit": commit,
+        "snapshot_commit": snapshot_commit,
         "checks": checks,
         "artifacts": artifacts,
         "commands": {
@@ -782,6 +795,14 @@ def current_repo_sha() -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run A-group BuildChecker E3 baseline")
     parser.add_argument("--check-only", action="store_true")
+    parser.add_argument(
+        "--md-rd-report-commit",
+        help="bind MD/RD report metadata to a reachable full repository commit",
+    )
+    parser.add_argument(
+        "--environment-image-ref",
+        help="record the image reference used for this E3 environment run",
+    )
     args = parser.parse_args()
 
     check = static_check()
@@ -808,7 +829,12 @@ def main() -> int:
 
     versions = record_versions(evidence_dir)
     repo_head = current_repo_sha()
-    md_rd = run_md_rd(work_root, evidence_dir)
+    if args.md_rd_report_commit and args.md_rd_report_commit != repo_head:
+        raise SystemExit(
+            "--md-rd-report-commit must equal the checked-out repository HEAD "
+            f"({repo_head}) so the report identifies the tested source tree"
+        )
+    md_rd = run_md_rd(work_root, evidence_dir, report_commit=args.md_rd_report_commit)
     commits = run_commits(work_root, evidence_dir)
 
     env_payload = {
@@ -817,6 +843,8 @@ def main() -> int:
         "cwd": str(PACKAGE_ROOT),
         "repo_head": repo_head,
         "machine": platform.machine(),
+        "image_ref": args.environment_image_ref,
+        "md_rd_project_root": "A-BuildChecker-E3测试基线/fixtures/md-rd",
     }
     write_json(evidence_dir / "env.json", env_payload)
     write_json(evidence_dir / "static-check.json", check)
@@ -836,8 +864,9 @@ def main() -> int:
         "notes": [
             "Graphs compare Makefile prerequisites of main.o with quoted project includes.",
             "System headers are out of scope.",
-            "This is the E3 baseline analyzer, not the E5 BuildChecker service.",
-            "B1 Tiny Greeting image is a different project and is not used as the MD/RD environment.",
+            "This is the E3 baseline analyzer, not a server-side FULL_CHECK API Job or the E5 BuildChecker service.",
+            "MD/RD report commit identifies the shared repository tree; snapshot_commit identifies the standalone bundle used for reproduction.",
+            "The environment image reference is recorded separately from any Registry delivery or DRAFT API receipt.",
         ],
     }
     write_json(evidence_dir / "summary.json", summary)

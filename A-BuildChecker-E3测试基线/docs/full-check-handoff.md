@@ -20,6 +20,10 @@ A 组在 E3 产出完整 ERROR_REPORT，以及 `actual.json` / `declared.json`�
 
 这是 E3 基线分析，不是 E5 的 BuildChecker 服务，也不使用 B1 Tiny Greeting 镜像。
 
-## 环境缺口
+## 环境消费与报告版本
 
-步骤②（DRAFT 环境消费）由 A 组环境负责人对接 B1。在 MD/RD 项目还没有对应 `image_ref` 之前，本基线在 Linux GNU Make / cc 上运行，并记录该限制。
+A 组环境负责人已按方法2选择可远端 clone 的 main commit `29c02d6604d7071d4b249ec958dd8a553caa670a`，并基于该提交的 `A-BuildChecker-E3测试基线/fixtures/md-rd` 生成 canonical-main MD/RD 报告。MD/RD DRAFT-compatible 本地镜像与行为复核见 [`evidence/run-20261010T043534Z-md-rd-main-29c02/`](../evidence/run-20261010T043534Z-md-rd-main-29c02/)；full baseline 运行见 [`evidence/run-20261010T051714Z/`](../evidence/run-20261010T051714Z/)。
+
+B1 已提交 MD/RD 专用环境包。A 组已从 GHCR 按固定 digest 拉取 B1 原始镜像，核对 Image ID、RepoDigest、源码 revision 和平台，并通过断网及 MD/RD 行为复测；接收记录为 `ACCEPTED`，见 [`evidence/run-20261010T160627Z-ghcr/`](../evidence/run-20261010T160627Z-ghcr/) 和 [`A_CROSS_MACHINE_RECEIPT.md`](../evidence/run-20261010T160627Z-ghcr/A_CROSS_MACHINE_RECEIPT.md)。E3 不要求部署 DRAFT API。
+
+`handoff/b2/` 现有报告和 B2/B4 candidate 仍绑定 standalone snapshot commit `39430e3cdcf16403eec63bf592129b50ab1ff53d`。canonical-main 报告绑定 `29c02d6604d7071d4b249ec958dd8a553caa670a`。两者代码内容一致；B2 若切换新报告，需要同步迁移 candidate base 和 B4 验证，不要混用两个 commit。

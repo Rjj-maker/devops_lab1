@@ -1,0 +1,11 @@
+{
+  "schema_version": "2.0",
+  "report_type": "ERROR_REPORT",
+  "producer_job_id": "job-e3-a-c0-001",
+  "repository": {
+    "url": "https://github.com/Rowan-hhh/devops_lab1.git",
+    "commit": "4f985129bb100b082fe2cfb4f95f846d00752a25"
+  },
+  "configuration_id": "cc-MODE0",
+  "findings": []
+}

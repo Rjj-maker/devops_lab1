@@ -37,3 +37,7 @@ commits/C2-incremental/C2-incremental-verify.stdout.log
 - `commits/*.sha` 为 40 位小写十六进制
 
 当前有效结果见 [`FINAL_RESULT.md`](FINAL_RESULT.md)。
+
+## B1 MD/RD 环境包 A 组验收
+
+`run-20261010T114727Z/` 记录 A 组按 B1 提交的 Dockerfile 独立构建验收。`run-20261010T160627Z-ghcr/` 记录 A 组从 GHCR 按固定 digest 拉取 B1 原始镜像后的接收端镜像身份、断网功能和 MD/RD 行为复测；`summary.json` 与 `registry-replay.json` 结果均为 `ACCEPTED`，`A_CROSS_MACHINE_RECEIPT.md` 为正式接收回执。

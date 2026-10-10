@@ -1,0 +1,1 @@
+此运行已由 `run-20261010T051714Z` 取代，不作为交接报告使用。此运行和此前的分析运行复用了 `job-e3-a-md-rd-001`，可能导致相同 pair/job artifact URI 冲突。当前 canonical-main 报告使用唯一 `producer_job_id=job-e3-a-md-rd-29c02d66`。原始运行文件保留用于审计。

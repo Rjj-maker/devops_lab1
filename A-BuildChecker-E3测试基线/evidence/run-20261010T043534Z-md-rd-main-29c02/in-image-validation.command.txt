@@ -1,0 +1,1 @@
+docker run --rm --platform linux/amd64 --network none --cap-add SYS_PTRACE --security-opt seccomp=unconfined --entrypoint /bin/sh -v <repo-run-dir>:/evidence e3-buildchecker-md-rd:29c02d6 /evidence/verify-md-rd-in-image.sh

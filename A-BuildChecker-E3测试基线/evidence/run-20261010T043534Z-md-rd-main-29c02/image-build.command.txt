@@ -1,0 +1,1 @@
+docker build --pull=false --platform linux/amd64 --build-arg SOURCE_COMMIT=29c02d6604d7071d4b249ec958dd8a553caa670a -f A-BuildChecker-E3测试基线/evidence/run-20261010T043534Z-md-rd-main-29c02/Dockerfile.md-rd -t e3-buildchecker-md-rd:29c02d6 /private/tmp/run-20261010T043534Z-md-rd-main-29c02/context

@@ -1,0 +1,3 @@
+cwd=/private/tmp/devops-lab1-b1-check
+command=docker run --rm --platform linux/amd64 --network none --entrypoint /bin/sh ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6 -c 'sed -i '"'"'s/#define VALUE 1/#define VALUE 2/'"'"' config.h && make clean && make && ./app'
+env.DOCKER_DEFAULT_PLATFORM=linux/amd64

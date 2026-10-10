@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "validated_at": "2026-10-10T16:07:57.972108Z",
+  "receiver": {
+    "host_platform": "macOS-27.0-arm64-arm-64bit",
+    "host_machine": "arm64",
+    "docker_server_platform": "linux/arm64",
+    "requested_image_platform": "linux/amd64",
+    "docker_default_platform": "linux/amd64"
+  },
+  "registry": {
+    "provider": "GitHub Container Registry",
+    "image_ref": "ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+    "pull_command": "docker pull --platform linux/amd64 ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+    "pull_exit_code": 0,
+    "manifest_digest": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+    "repo_digests": [
+      "ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6"
+    ],
+    "image_id": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+    "os": "linux",
+    "architecture": "amd64",
+    "source_revision": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+    "project_label": "e3-buildchecker-md-rd@2026-09-10"
+  },
+  "offline_validation": {
+    "verify_exit_code": 0,
+    "verify_stdout": "1\n",
+    "md_stale": {
+      "exit_code": 0,
+      "output": "1",
+      "main_recompiled": false
+    },
+    "md_clean_rebuild": {
+      "exit_code": 0,
+      "output": "2",
+      "main_recompiled": true
+    },
+    "rd_rebuild": {
+      "exit_code": 0,
+      "output": "1",
+      "main_recompiled": true
+    },
+    "checks": {
+      "pull_succeeded": true,
+      "inspect_succeeded": true,
+      "expected_repo_digest_present": true,
+      "image_id_matches_published_digest": true,
+      "linux_amd64": true,
+      "source_revision_matches": true,
+      "project_label_matches": true,
+      "verify_passes": true,
+      "compiler_and_make_available": true,
+      "source_check_passes": true,
+      "md_stale_passes": true,
+      "md_clean_rebuild_passes": true,
+      "rd_rebuild_passes": true
+    }
+  },
+  "result": "ACCEPTED"
+}

@@ -1,0 +1,51 @@
+[
+    {
+        "Architecture": "amd64",
+        "Config": {
+            "Cmd": [
+                "./app"
+            ],
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Labels": {
+                "org.opencontainers.image.revision": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+                "org.opencontainers.image.source": "https://github.com/Rowan-hhh/devops_lab1",
+                "org.opencontainers.image.title": "E3 BuildChecker MD-RD environment"
+            },
+            "WorkingDir": "/workspace"
+        },
+        "Created": "2026-10-10T12:52:14.737636436+08:00",
+        "Descriptor": {
+            "digest": "sha256:a74c1fd44aaea1ff2427d6b03fcdd8724b32ed764140303e49ea2378b334b6b3",
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "size": 2048
+        },
+        "Id": "sha256:a74c1fd44aaea1ff2427d6b03fcdd8724b32ed764140303e49ea2378b334b6b3",
+        "Metadata": {
+            "LastTagTime": "2026-10-10T04:52:14.764558352Z"
+        },
+        "Os": "linux",
+        "Parent": "sha256:5c1792b972b989cf942ab16e076cd5becf60be198184bcc8949a46c28cc2173e",
+        "RepoDigests": [
+            "e3-buildchecker-md-rd@sha256:a74c1fd44aaea1ff2427d6b03fcdd8724b32ed764140303e49ea2378b334b6b3"
+        ],
+        "RepoTags": [
+            "e3-buildchecker-md-rd:29c02d6"
+        ],
+        "RootFS": {
+            "Layers": [
+                "sha256:34467cc93912af891dfee8a3902adf9b4f355a9bca4eaa46f658d1181a21de0d",
+                "sha256:5252d91aa58080b1fd3876ad7bff3ea2e9898167041b8e32f4569cd8153858fe",
+                "sha256:8dc0544f0ae8bdf86edae95d9cf2c6e738eae8354a514814877fa622d136d1dd",
+                "sha256:720f1d1c5f445d6851dd1525d07180ef9316d38b4f78a8c365bc6ba293d31ab0",
+                "sha256:d388c97d416a7af69f9d2be5c1a81a45661dc0052bb9438ebf77bbdc75613fa2",
+                "sha256:1f3f3f47fe92b6085222955bda4ad01b78b5b157900c4c97b3c9ca5cb3eda682",
+                "sha256:9650ab15fc6b88381ecf41d23c784b963fa082da7eab358274fe015d8918cf3b",
+                "sha256:4ce426c688b0996d713b2297e5066804822031ba0c8a241133276247c5f329c7"
+            ],
+            "Type": "layers"
+        },
+        "Size": 98042071
+    }
+]

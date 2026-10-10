@@ -34,7 +34,9 @@
 | E3-02 | C0/C1/C2 提交版本 | A 组 BuildChecker | `fixtures/commits/` 与 `evidence/run-*/commits/*.sha` | 三个连续 commit 可追溯；C1 引入 MD，C2 只改命令 | DONE |
 | E3-03 | 基线依赖图 | A 组 BuildChecker | C0 `actual.json` / `declared.json` | C0 无 MD/RD；图只覆盖 `main.o` 项目头文件 | DONE |
 | E3-04 | 增量检测基线 | A 组 BuildChecker | `commits/c0-to-c1-delta.json` | C1 相对 C0 新增 `feature.h` 缺失；C2 该发现未消除 | DONE |
-| E3-05 | 并行测试执行 | A 组 BuildChecker | `evidence/run-20261005T071837Z/summary.json` | 基线行为与 oracle 一致，结果 `ACCEPTED`。不含 E5 服务和 B4 Patch 复核 | DONE |
+| E3-05 | 并行测试执行 | A 组 BuildChecker | `evidence/run-20261010T051714Z/summary.json` | canonical-main MD/RD 报告与 oracle 一致，结果 `ACCEPTED`；保留原始 standalone run | DONE |
+| E3-06 | MD/RD 在 B1 工具链环境中的本地消费验证 | A 组环境负责人 | `evidence/run-20261010T043534Z-md-rd-main-29c02/` | 源码 commit 与 canonical main SHA 对齐；镜像中 `make` / `./app` 通过，MD/RD 行为符合 oracle | DONE |
+| E3-07 | B1 MD/RD 专用环境交付与跨组 image_ref 获取 | B1 + A 组环境负责人 | B1 环境包、源码 SHA、构建/测试日志、Registry `image_ref` 和 A 组接收记录 | A 组按 B1 原始镜像 digest 从共享 Registry 拉取、核对镜像身份并复测 | DONE |
 
 ---
 
@@ -47,7 +49,9 @@
 - E2-08 异步 Job 决策记录见 `ADR-001-async-job.md`。
 - E2-10 A 组样例通过对应 Schema `$defs` 校验；缺少 `baseline` 和非法 `job_type` 的输入按预期被拒绝。baseline 与 base commit、Job/报告字段及计数的静态一致性检查见 `E2_COMPLETION.md`。
 - E2-11 A 组完成情况见 `E2_COMPLETION.md`。B 组确认项仍未完成。
-- E3-01～E3-05 BuildChecker 测试基线见 `A-BuildChecker-E3测试基线/`。有效运行 `evidence/run-20261005T071837Z/` 为 `ACCEPTED`。B3 确认、B1 为本项目提供镜像、B4 Patch 复核仍待对方。
+- E3-01～E3-05 BuildChecker 测试基线见 `A-BuildChecker-E3测试基线/`。原始 standalone run 与 canonical-main run `evidence/run-20261010T051714Z/` 均为 `ACCEPTED`。
+- E3-06 A 组环境负责人已使用 B1 工具链基础镜像派生 MD/RD 本地镜像，并在 `evidence/run-20261010T043534Z-md-rd-main-29c02/` 复核通过。
+- E3-07 B1 已在 `fa07b7199e985b1dda63cc2efa467e5eb5a0f0ee` 提交 MD/RD 环境包；A 组已从 GHCR 按 digest 拉取 B1 原始镜像，核对镜像身份和源码基线，并通过断网功能及 MD/RD 行为复测，结果为 `ACCEPTED`，证据见 `A-BuildChecker-E3测试基线/evidence/run-20261010T160627Z-ghcr/`。E3 不要求实现 DRAFT API。
 
 ## 未完成或受外部确认阻塞
 
@@ -58,7 +62,6 @@
 | E2-07 三轮配对练习 | BLOCKED | 当前仓库没有可核对的三轮讨论记录或双方确认记录 | 与配对 B 组完成并保存三轮记录 |
 | E2-11 双组完成情况登记 | IN_PROGRESS | 本文件和 A 组完成情况已经记录；B 组状态及双方共同确认尚未登记 | 汇总 B 组交付与双方验收结果 |
 | E3 B3 确认检测项目 README | WAITING | BuildChecker 接口已交付，B3 尚未确认 DRAFT 可按同一 README 运行 | B3 按 `A-BuildChecker-E3测试基线/docs/a1-interface.md` 确认 |
-| E3 DRAFT 环境绑定 MD/RD 项目 | BLOCKED | 步骤②由 A 组环境负责人对接 B1；Tiny Greeting 不是本检测项目 | 为本项目提供 Dockerfile/`image_ref` 后再在该环境复跑 |
 | E3 Patch 验证与失败恢复 | BLOCKED | 步骤④由 A 组检测/复核负责人对接 B4 | B4 提供候选 Patch 与拒绝恢复记录后复核 MD/RD |
 
 `pair03` 等联调实例值仍为占位，直到双方确认。E3 BuildChecker 基线的真实 SHA 与运行记录见 `A-BuildChecker-E3测试基线/evidence/`。

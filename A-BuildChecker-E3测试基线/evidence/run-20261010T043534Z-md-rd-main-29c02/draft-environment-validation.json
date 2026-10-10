@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "result": "ACCEPTED_LOCAL_ENVIRONMENT_VALIDATION",
+  "checked_at": "2026-10-10T04:35:34Z",
+  "scope": "E3 MD/RD environment consumption and baseline verification on the A-side local Colima Docker Engine",
+  "draft_api_invoked": false,
+  "source": {
+    "repository_url": "https://github.com/Rowan-hhh/devops_lab1.git",
+    "repository_commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+    "project_root": "A-BuildChecker-E3测试基线/fixtures/md-rd",
+    "files_sha256": {
+      "Makefile": "a7e803b46ff58ae45e1ae6f2658b80461bd538aa5faad0d35224a029614631f6",
+      "README.md": "d9ec951ce5b61ded1bee71fa2238f448f0af63bf55fe42b01e799e06cbef2f24",
+      "config.h": "2573efdf6e122c087130fd32f829694daf92429315b05aa27d5265a790fdb50d",
+      "interface.json": "d0195e02ec1bb120d083f4c79b7f4261c12511bdaf2232782280e03c873ef7c8",
+      "main.c": "a1bbac023098d5bdd6302977e565b57c4959ee2c34d0787c1c5b2ea5c208ee9f",
+      "unused.h": "2412a11e8d5f3a17992cd4527501dc13a6671ffdc9bf30d0594d89ccd12641a6"
+    }
+  },
+  "draft_input": {
+    "schema_version": "2.0",
+    "trace_id": "trace-e3-md-rd-main-29c02",
+    "job_type": "DRAFT",
+    "input": {
+      "repository": {
+        "url": "https://github.com/Rowan-hhh/devops_lab1.git",
+        "commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+        "project_root": "A-BuildChecker-E3测试基线/fixtures/md-rd"
+      },
+      "build": {
+        "build_command": "make",
+        "test_command": "./app"
+      },
+      "limits": {
+        "max_iterations": 5,
+        "timeout_seconds": 600
+      }
+    }
+  },
+  "environment_image": {
+    "built_from": "B1 accepted Tiny Greeting reference image",
+    "base_image_ref": "e3-draft-tiny-greeting@sha256:66b6924106f5f9c5e66705c1678a58dfe81326ede0b3bc61d3a408f3a3a2c06a",
+    "dockerfile_path": "A-BuildChecker-E3测试基线/evidence/run-20261010T043534Z-md-rd-main-29c02/Dockerfile.md-rd",
+    "dockerfile_sha256": "54e9106dc8b731bc81c5fe4cc1160c9d7eeb2d381c3c6a503a6ff16f7f31a119",
+    "tag": "e3-buildchecker-md-rd:29c02d6",
+    "image_id": "sha256:a74c1fd44aaea1ff2427d6b03fcdd8724b32ed764140303e49ea2378b334b6b3",
+    "local_image_ref": "e3-buildchecker-md-rd@sha256:a74c1fd44aaea1ff2427d6b03fcdd8724b32ed764140303e49ea2378b334b6b3",
+    "os": "linux",
+    "architecture": "amd64",
+    "local_only": true,
+    "registry_published": false,
+    "cross_host_pull_verified": false
+  },
+  "image_build": {
+    "exit_code": 0,
+    "command_log": "A-BuildChecker-E3测试基线/evidence/run-20261010T043534Z-md-rd-main-29c02/image-build.command.txt",
+    "stdout_log": "A-BuildChecker-E3测试基线/evidence/run-20261010T043534Z-md-rd-main-29c02/image-build.stdout.log",
+    "stderr_log": "A-BuildChecker-E3测试基线/evidence/run-20261010T043534Z-md-rd-main-29c02/image-build.stderr.log"
+  },
+  "in_image_validation": {
+    "exit_code": 0,
+    "checks": [
+      "draft_test=PASS",
+      "md_stale_behavior=PASS",
+      "md_clean_rebuild=PASS",
+      "rd_rebuild=PASS"
+    ],
+    "draft_build": {
+      "command": "make",
+      "exit_code": 0
+    },
+    "draft_test": {
+      "command": "./app",
+      "exit_code": 0,
+      "stdout": "1\\n"
+    },
+    "md_stale_build_output": "1\\n",
+    "md_clean_rebuild_output": "2\\n",
+    "rd_unused_header_triggers_rebuild": true,
+    "strace_available_in_image": false,
+    "stdout_logs_dir": "A-BuildChecker-E3测试基线/evidence/run-20261010T043534Z-md-rd-main-29c02",
+    "script_path": "A-BuildChecker-E3测试基线/evidence/run-20261010T043534Z-md-rd-main-29c02/verify-md-rd-in-image.sh"
+  },
+  "baseline_analysis": {
+    "run_id": "run-20261010T051714Z",
+    "result": "ACCEPTED",
+    "run_host": "macOS-27.0-arm64-arm-64bit",
+    "report_repository_commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+    "report_job_id": "job-e3-a-md-rd-29c02d66",
+    "report_configuration_id": "cc-default",
+    "report_sha256": "7b021f47912e16bf43e084f23eaa7ecae59f42fa34a33f02b0c97b7ccdb00f22",
+    "findings": [
+      {
+        "finding_id": "finding-e3-md-rd-missing-001",
+        "type": "MISSING",
+        "target": "main.o",
+        "dependency": "config.h",
+        "commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+        "detector": "INSTRUCTOR_ORACLE"
+      },
+      {
+        "finding_id": "finding-e3-md-rd-redundant-001",
+        "type": "REDUNDANT",
+        "target": "main.o",
+        "dependency": "unused.h",
+        "commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+        "detector": "INSTRUCTOR_ORACLE"
+      }
+    ],
+    "checks": {
+      "clean_build": true,
+      "md_stale": true,
+      "md_clean": true,
+      "rd_rebuild": true,
+      "oracle": true,
+      "app_executable": true
+    },
+    "snapshot_commit_for_bundle": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+    "bundle_path": "A-BuildChecker-E3测试基线/evidence/run-20261010T051714Z/md-rd/md-rd.bundle",
+    "note": "The error report is bound to the fetchable main commit. The standalone bundle SHA remains an internal reproduction snapshot. This report has a unique local analysis job ID.",
+    "report_path": "A-BuildChecker-E3测试基线/evidence/run-20261010T051714Z/md-rd/artifacts/error-report.json",
+    "summary_path": "A-BuildChecker-E3测试基线/evidence/run-20261010T051714Z/summary.json",
+    "runner_attestation_path": "A-BuildChecker-E3测试基线/evidence/run-20261010T051714Z/runner-attestation.json",
+    "runner_sha256": "fbc2559658d8aa5376ad88150c99fd6569f3de3c616bb30d430a315ec951f2cf"
+  },
+  "delivery_status": {
+    "local_environment_consumption": "PASS",
+    "B1_DRAFT_API_receipt": "NOT_REQUIRED_FOR_E3",
+    "registry_image_ref": "PENDING",
+    "cross_group_image_transfer": "PENDING",
+    "B1_MD_RD_environment_package": "PENDING"
+  },
+  "compatibility_note": "The previously committed B2 handoff report remains bound to MD/RD snapshot commit 39430e3cdcf16403eec63bf592129b50ab1ff53d. It was not overwritten. B2 candidate records based on that snapshot must not be silently mixed with this canonical-main report.",
+  "image_ref": {
+    "value": "e3-buildchecker-md-rd@sha256:a74c1fd44aaea1ff2427d6b03fcdd8724b32ed764140303e49ea2378b334b6b3",
+    "scope": "local Colima only",
+    "registry_published": false,
+    "cross_host_pull_verified": false,
+    "local_only": true
+  },
+  "verification_expectations": {
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "test_stdout": "1\n"
+  },
+  "required_http_headers_not_submitted": [
+    "Idempotency-Key"
+  ],
+  "draft_api_status": "NOT_INVOKED_OUT_OF_E3_SCOPE",
+  "draft_input_note": "This records the v0.2 DRAFT request shape used for local E3 environment validation. E3 does not require a deployed DRAFT API Job.",
+  "draft_api_scope_note": "E3 requires a reproducible project environment and its evidence; it does not require a deployed DRAFT API Job."
+}

@@ -111,4 +111,4 @@ evidence/run-20260929T161653Z/
 
 A 组按 B3 项目约定核对了输入文件、`make`、`./hello` 和预期输出。最新 B1 运行从提交 `36f6dd61689f9cdf087d0f83a7d60d6d05db2225` 执行，完整通过失败构建、参考构建、工具版本、可执行文件和断网功能验证。验收结论见 [A 组 B1 DRAFT 样例环境验收记录](../../A-BuildChecker-EChecker-接口文档/docs/B1-DRAFT环境验收.md)。
 
-镜像目前是 Colima 本地镜像。Registry 发布、共享传输和 A 组跨机器按 digest 获取尚未验证；双方确认交付方式并完成接收验证后，再更新实例值表。
+本节只说明 Tiny Greeting 样例镜像：其 Registry 发布、共享传输和 A 组按 digest 获取尚未验证。MD/RD 专用镜像属于另一个项目，A 组已完成 GHCR digest 接收验收，详见 [`A 组 MD/RD 接收回执`](../../A-BuildChecker-E3测试基线/evidence/run-20261010T160627Z-ghcr/A_CROSS_MACHINE_RECEIPT.md)。双方仍需单独确认 Tiny Greeting 镜像的交付方式和正式实例值。

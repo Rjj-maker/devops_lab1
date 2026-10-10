@@ -8,7 +8,7 @@
 
 ## 结论
 
-**B3 项目契约、B1 失败/参考构建和容器功能验证通过。B1 样例环境验收通过。A 组跨机器取得同一镜像的交付方式仍待确认。**
+**B3 项目契约、B1 Tiny Greeting 失败/参考构建和容器功能验证通过。Tiny Greeting 样例环境验收通过；该样例镜像的跨机器交付仍待确认。另一个 MD/RD 专用镜像已通过 GHCR digest 接收验收，见 [`A 组 MD/RD 接收回执`](../../A-BuildChecker-E3测试基线/evidence/run-20261010T160627Z-ghcr/A_CROSS_MACHINE_RECEIPT.md)。两种项目的镜像和验收范围不同。**
 
 | 检查项 | 结论 | 核对结果 |
 | --- | --- | --- |
@@ -17,7 +17,7 @@
 | B1 参考构建 | 通过 | `Dockerfile.reference` 构建和镜像检查退出码为 `0`；镜像内 GCC 为 `12.2.0-14+deb12u1`、GNU Make 为 `4.3`；`/work/hello` 存在且可执行。 |
 | B1 功能验证 | 通过 | 容器使用 `--network none` 运行，退出码为 `0`，stdout 精确为 `hello E3\n`。 |
 | 当前提交及镜像平台 | 通过 | 运行摘要记录当前 B1 提交 `36f6dd61689f9cdf087d0f83a7d60d6d05db2225`；镜像为 `linux/amd64`。Colima Engine 为 `linux/arm64`，本次通过 `DOCKER_DEFAULT_PLATFORM=linux/amd64` 完成构建和容器验证。 |
-| A 组跨机器取得同一镜像 | 未验收 | 当前镜像位于本机 Colima。Registry 发布、镜像文件共享或 A 组拉取记录尚未提供。 |
+| A 组跨机器取得 Tiny Greeting 样例镜像 | 未验收 | 本记录覆盖的 Tiny Greeting 镜像仍只有本机 Colima 信息；GHCR MD/RD 镜像属于不同项目，不作为本样例的接收证明。E3-07 的 MD/RD 专用环境接收验收已另行通过。 |
 
 ## 最新成功运行
 

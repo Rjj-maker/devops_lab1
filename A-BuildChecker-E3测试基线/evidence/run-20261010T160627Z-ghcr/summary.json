@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0",
+  "run_id": "run-20261010T160627Z-ghcr",
+  "generated_at": "2026-10-10T16:07:57.972108Z",
+  "purpose": "A-group cross-machine acceptance of the exact B1 MD/RD image pulled from GHCR by digest",
+  "registry_image_ref": "ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+  "expected_registry_digest": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+  "source_baseline_commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+  "validation_checkout": {
+    "path": "/private/tmp/devops-lab1-b1-check",
+    "commit": "fa07b7199e985b1dda63cc2efa467e5eb5a0f0ee",
+    "clean": true
+  },
+  "host": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.9.6 (default, Aug 25 2026, 21:26:21) \n[Clang 21.0.0 (clang-2100.3.34.2)]",
+    "docker_default_platform": "linux/amd64"
+  },
+  "docker_server": "Client: Docker Engine - Community\n Version:           29.8.1\n API version:       1.54 (downgraded from 1.56)\n Go version:        go1.27.1\n Git commit:        4a63305d74\n Built:             Tue Sep 15 11:21:13 2026\n OS/Arch:           darwin/arm64\n Context:           colima\n\nServer: Docker Engine - Community\n Engine:\n  Version:          29.5.2\n  API version:      1.54 (minimum version 1.40)\n  Go version:       go1.26.3\n  Git commit:       568f755\n  Built:            Wed May 20 14:39:25 2026\n  OS/Arch:          linux/arm64\n  Experimental:     false\n containerd:\n  Version:          v2.2.4\n  GitCommit:        193637f7ee8ae5f5aa5248f49e7baa3e6164966e\n runc:\n  Version:          1.3.5\n  GitCommit:        v1.3.5-0-g488fc13e\n docker-init:\n  Version:          0.19.0\n  GitCommit:        de40ad0\n",
+  "image": {
+    "image_id": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+    "repo_tags": [
+      "ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6"
+    ],
+    "repo_digests": [
+      "ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6"
+    ],
+    "created": "2026-10-10T16:08:23.870793198+08:00",
+    "architecture": "amd64",
+    "os": "linux",
+    "size_bytes": 98037635,
+    "labels": {
+      "dev.devops-lab.project": "e3-buildchecker-md-rd@2026-09-10",
+      "org.opencontainers.image.revision": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+      "org.opencontainers.image.source": "https://github.com/Rowan-hhh/devops_lab1",
+      "org.opencontainers.image.title": "E3 BuildChecker MD/RD environment"
+    },
+    "descriptor": {
+      "mediaType": "application/vnd.oci.image.manifest.v1+json",
+      "digest": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+      "size": 1400
+    }
+  },
+  "checks": {
+    "pull_succeeded": true,
+    "inspect_succeeded": true,
+    "expected_repo_digest_present": true,
+    "image_id_matches_published_digest": true,
+    "linux_amd64": true,
+    "source_revision_matches": true,
+    "project_label_matches": true,
+    "verify_passes": true,
+    "compiler_and_make_available": true,
+    "source_check_passes": true,
+    "md_stale_passes": true,
+    "md_clean_rebuild_passes": true,
+    "rd_rebuild_passes": true
+  },
+  "stages": {
+    "docker_version": {
+      "command": "docker version",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:52.380177Z",
+      "finished_at": "2026-10-10T16:07:52.424450Z",
+      "exit_code": 0,
+      "stdout_log": "docker-version.stdout.log",
+      "stderr_log": "docker-version.stderr.log"
+    },
+    "registry_pull": {
+      "command": "docker pull --platform linux/amd64 ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:52.424469Z",
+      "finished_at": "2026-10-10T16:07:55.044954Z",
+      "exit_code": 0,
+      "stdout_log": "registry-pull.stdout.log",
+      "stderr_log": "registry-pull.stderr.log"
+    },
+    "image_inspect": {
+      "command": "docker image inspect ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:55.044982Z",
+      "finished_at": "2026-10-10T16:07:55.074812Z",
+      "exit_code": 0,
+      "stdout_log": "image-inspect.stdout.log",
+      "stderr_log": "image-inspect.stderr.log"
+    },
+    "verify": {
+      "command": "docker run --rm --platform linux/amd64 --network none ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:55.074875Z",
+      "finished_at": "2026-10-10T16:07:55.221607Z",
+      "exit_code": 0,
+      "stdout_log": "verify.stdout.log",
+      "stderr_log": "verify.stderr.log",
+      "stdout_exact_match": true
+    },
+    "compiler_version": {
+      "command": "docker run --rm --platform linux/amd64 --network none --entrypoint /bin/sh ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6 -c 'gcc --version'",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:55.221638Z",
+      "finished_at": "2026-10-10T16:07:55.366193Z",
+      "exit_code": 0,
+      "stdout_log": "compiler-version.stdout.log",
+      "stderr_log": "compiler-version.stderr.log"
+    },
+    "make_version": {
+      "command": "docker run --rm --platform linux/amd64 --network none --entrypoint /bin/sh ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6 -c 'make --version'",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:55.366215Z",
+      "finished_at": "2026-10-10T16:07:55.495836Z",
+      "exit_code": 0,
+      "stdout_log": "make-version.stdout.log",
+      "stderr_log": "make-version.stderr.log"
+    },
+    "source_check": {
+      "command": "docker run --rm --platform linux/amd64 --network none --entrypoint /bin/sh ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6 -c 'test -x /work/app && test -f /work/main.c && test -f /work/config.h && test -f /work/unused.h && test -f /work/Makefile && test -f /work/README.md && test -f /work/interface.json'",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:55.495857Z",
+      "finished_at": "2026-10-10T16:07:55.617519Z",
+      "exit_code": 0,
+      "stdout_log": "source-check.stdout.log",
+      "stderr_log": "source-check.stderr.log"
+    },
+    "md_stale": {
+      "command": "docker run --rm --platform linux/amd64 --network none --entrypoint /bin/sh ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6 -c 'sed -i '\"'\"'s/#define VALUE 1/#define VALUE 2/'\"'\"' config.h && make && ./app'",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:55.617543Z",
+      "finished_at": "2026-10-10T16:07:55.797838Z",
+      "exit_code": 0,
+      "stdout_log": "md-stale.stdout.log",
+      "stderr_log": "md-stale.stderr.log",
+      "observed_output": "1",
+      "main_recompiled": false
+    },
+    "md_clean_rebuild": {
+      "command": "docker run --rm --platform linux/amd64 --network none --entrypoint /bin/sh ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6 -c 'sed -i '\"'\"'s/#define VALUE 1/#define VALUE 2/'\"'\"' config.h && make clean && make && ./app'",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:55.797858Z",
+      "finished_at": "2026-10-10T16:07:56.401954Z",
+      "exit_code": 0,
+      "stdout_log": "md-clean-rebuild.stdout.log",
+      "stderr_log": "md-clean-rebuild.stderr.log",
+      "observed_output": "2",
+      "main_recompiled": true
+    },
+    "rd_rebuild": {
+      "command": "docker run --rm --platform linux/amd64 --network none --entrypoint /bin/sh ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6 -c 'sleep 1 && touch unused.h && make && ./app'",
+      "working_directory": "/private/tmp/devops-lab1-b1-check",
+      "started_at": "2026-10-10T16:07:56.401975Z",
+      "finished_at": "2026-10-10T16:07:57.972068Z",
+      "exit_code": 0,
+      "stdout_log": "rd-rebuild.stdout.log",
+      "stderr_log": "rd-rebuild.stderr.log",
+      "observed_output": "1",
+      "main_recompiled": true
+    }
+  },
+  "result": "ACCEPTED"
+}

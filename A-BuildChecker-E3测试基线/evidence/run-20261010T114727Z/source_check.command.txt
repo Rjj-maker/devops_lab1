@@ -1,0 +1,2 @@
+cwd=/private/tmp/devops-lab1-b1-check/A-BuildChecker-E3测试基线
+command=/opt/homebrew/bin/docker run --rm --network none --entrypoint /bin/sh e3-buildchecker-md-rd:b1-20260910 -c 'test -x /work/app && test -f /work/main.c && test -f /work/config.h && test -f /work/unused.h && test -f /work/Makefile'

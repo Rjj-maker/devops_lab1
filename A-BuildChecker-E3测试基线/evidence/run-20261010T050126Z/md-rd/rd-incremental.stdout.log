@@ -1,0 +1,1 @@
+cc -Wall -Wextra -std=c11 -c -o main.o main.c

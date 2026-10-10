@@ -1,0 +1,4 @@
+draft_test=PASS
+md_stale_behavior=PASS
+md_clean_rebuild=PASS
+rd_rebuild=PASS

@@ -1,0 +1,3 @@
+5efd7ec (HEAD -> main, tag: C2) C2: change compile command to -DMODE=7
+9c3e066 (tag: C1) C1: include feature.h without Makefile update
+4f98512 (tag: C0) C0: correct header declarations

@@ -1,0 +1,32 @@
+{
+  "request_body": {
+    "schema_version": "2.0",
+    "trace_id": "trace-e3-md-rd-main-29c02",
+    "job_type": "DRAFT",
+    "input": {
+      "repository": {
+        "url": "https://github.com/Rowan-hhh/devops_lab1.git",
+        "commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+        "project_root": "A-BuildChecker-E3测试基线/fixtures/md-rd"
+      },
+      "build": {
+        "build_command": "make",
+        "test_command": "./app"
+      },
+      "limits": {
+        "max_iterations": 5,
+        "timeout_seconds": 600
+      }
+    }
+  },
+  "verification_expectations": {
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "test_stdout": "1\n"
+  },
+  "required_http_headers_not_submitted": [
+    "Idempotency-Key"
+  ],
+  "api_status": "NOT_INVOKED_OUT_OF_E3_SCOPE",
+  "note": "This records the v0.2 DRAFT request shape used to identify the local E3 validation inputs. E3 validates the reproducible environment and does not require a deployed DRAFT API Job."
+}

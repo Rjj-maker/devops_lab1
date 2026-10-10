@@ -1,0 +1,133 @@
+{
+  "result": "ACCEPTED",
+  "checked_at": "2026-10-10T05:01:31Z",
+  "git_head": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+  "environment": {
+    "os": "macOS-27.0-arm64-arm-64bit",
+    "python": "3.9.6 (default, Aug 25 2026, 21:26:21) \n[Clang 21.0.0 (clang-2100.3.34.2)]",
+    "cwd": "/Users/zane/devops/devops_lab1/A-BuildChecker-E3测试基线",
+    "repo_head": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+    "machine": "arm64",
+    "image_ref": "e3-buildchecker-md-rd@sha256:a74c1fd44aaea1ff2427d6b03fcdd8724b32ed764140303e49ea2378b334b6b3",
+    "md_rd_project_root": "A-BuildChecker-E3测试基线/fixtures/md-rd"
+  },
+  "md_rd": {
+    "commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+    "snapshot_commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+    "checks": {
+      "clean_build": true,
+      "md_stale": true,
+      "md_clean": true,
+      "rd_rebuild": true,
+      "oracle": true,
+      "app_executable": true
+    },
+    "artifacts": {
+      "declared_sha256": "4f97c34be6d47c97185d1e51ec54e725f1024ac1ad99031bf3ed4fafbfa1e6ec",
+      "actual_sha256": "eb7518f372ab27e32b6264d68f14b3389776fcc7b8fef8c2098bb61b4b9fdbb2",
+      "error_report_sha256": "2337792f9f9d62633db749f00e76962014a81f8567839b15b7ff961f8c60e836",
+      "missing_count": 1,
+      "redundant_count": 1,
+      "job_id": "job-e3-a-md-rd-001",
+      "commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+      "uri_prefix": "artifact://pair03/job-e3-a-md-rd-001"
+    },
+    "commands": {
+      "clean": 0,
+      "build": 0,
+      "verify": "1\n",
+      "md_incremental": "1\n",
+      "md_clean": "2\n",
+      "rd_stdout": "cc -Wall -Wextra -std=c11 -c -o main.o main.c\n"
+    },
+    "strace_saw_config_h": null,
+    "passed": true,
+    "rebuild_log_exit": 0,
+    "rebuild_make_exit": 0
+  },
+  "commits": {
+    "shas": {
+      "C0": "4f985129bb100b082fe2cfb4f95f846d00752a25",
+      "C1": "9c3e06606aa42afef25c53dbb5eb0c5a6330e5ea",
+      "C2": "5efd7ece7569439950881a9b52b184356aa91687"
+    },
+    "results": {
+      "C0": {
+        "sha": "4f985129bb100b082fe2cfb4f95f846d00752a25",
+        "stdout": "10\n",
+        "passed": true,
+        "oracle_ok": true,
+        "artifacts": {
+          "declared_sha256": "07ebd9462b54758139a3d7f6db3d774bc9cdf47b3b9d73afd091fda64c5f215c",
+          "actual_sha256": "bfb2730785ed4de0b8e2f1a1f67a465e722955d718f3b74f451799e5eb003a53",
+          "error_report_sha256": "152fd07c27097ec52f0452991d92c429f9f8dfc7cc62b11640eeb7037b34ead5",
+          "missing_count": 0,
+          "redundant_count": 0,
+          "job_id": "job-e3-a-c0-001",
+          "commit": "4f985129bb100b082fe2cfb4f95f846d00752a25",
+          "uri_prefix": "artifact://pair03/job-e3-a-c0-001"
+        }
+      },
+      "C1": {
+        "sha": "9c3e06606aa42afef25c53dbb5eb0c5a6330e5ea",
+        "stdout": "12\n",
+        "passed": true,
+        "oracle_ok": true,
+        "artifacts": {
+          "declared_sha256": "605ff1096e26bc7e3c0881296503e6a9b3b01a4867c05f77598a034bfc5b638a",
+          "actual_sha256": "d1e303d2cc9f8abfd91a0b4e31fcf0add35551c6152620971a9a6efe3bb1a880",
+          "error_report_sha256": "4eb0bd6ebe1f86faaba666691087e41e913b29a31ef4408fb39501043af1f645",
+          "missing_count": 1,
+          "redundant_count": 0,
+          "job_id": "job-e3-a-c1-001",
+          "commit": "9c3e06606aa42afef25c53dbb5eb0c5a6330e5ea",
+          "uri_prefix": "artifact://pair03/job-e3-a-c1-001"
+        }
+      },
+      "C2": {
+        "sha": "5efd7ece7569439950881a9b52b184356aa91687",
+        "stdout": "19\n",
+        "passed": true,
+        "oracle_ok": true,
+        "artifacts": {
+          "declared_sha256": "e83c663d167f3e1b9dddfa8ef3cd8aaefd2ce3f175000d73f738a303b10e24db",
+          "actual_sha256": "0142e37583dec38abd37261f4612aa8e2e5f1c888e89807be71738b8f2a55c19",
+          "error_report_sha256": "f068d7d1a10fd0b3da3abd912d8982f0ef8940dd8b4e20872332a9ee4ab2dbdb",
+          "missing_count": 1,
+          "redundant_count": 0,
+          "job_id": "job-e3-a-c2-001",
+          "commit": "5efd7ece7569439950881a9b52b184356aa91687",
+          "uri_prefix": "artifact://pair03/job-e3-a-c2-001"
+        }
+      }
+    },
+    "incremental": {
+      "make_stdout": "make: Nothing to be done for `all'.\n",
+      "stdout": "12\n",
+      "clean_stdout": "19\n",
+      "clean_exit": 0,
+      "clean_build_exit": 0
+    },
+    "git_log": "5efd7ec (HEAD -> main, tag: C2) C2: change compile command to -DMODE=7\n9c3e066 (tag: C1) C1: include feature.h without Makefile update\n4f98512 (tag: C0) C0: correct header declarations\n",
+    "checks": {
+      "C0": true,
+      "C1": true,
+      "C2_clean": true,
+      "C2_incremental": true,
+      "C2_clean_after_incremental": true,
+      "delta": true
+    },
+    "passed": true
+  },
+  "tool_versions": {
+    "make": "GNU Make 3.81",
+    "cc": "Apple clang version 21.0.0 (clang-2100.3.34.2)"
+  },
+  "notes": [
+    "Graphs compare Makefile prerequisites of main.o with quoted project includes.",
+    "System headers are out of scope.",
+    "This is the E3 baseline analyzer, not the E5 BuildChecker service.",
+    "MD/RD report commit identifies the shared repository tree; snapshot_commit identifies the standalone bundle used for reproduction.",
+    "The environment image reference is recorded separately from any Registry delivery or DRAFT API receipt."
+  ]
+}

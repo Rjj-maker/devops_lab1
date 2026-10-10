@@ -1,0 +1,35 @@
+{
+  "standalone_snapshot_commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+  "canonical_repository_commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+  "compared_project_files": {
+    "main.c": {
+      "standalone_snapshot_sha256": "a1bbac023098d5bdd6302977e565b57c4959ee2c34d0787c1c5b2ea5c208ee9f",
+      "main_commit_sha256": "a1bbac023098d5bdd6302977e565b57c4959ee2c34d0787c1c5b2ea5c208ee9f",
+      "match": true
+    },
+    "config.h": {
+      "standalone_snapshot_sha256": "2573efdf6e122c087130fd32f829694daf92429315b05aa27d5265a790fdb50d",
+      "main_commit_sha256": "2573efdf6e122c087130fd32f829694daf92429315b05aa27d5265a790fdb50d",
+      "match": true
+    },
+    "unused.h": {
+      "standalone_snapshot_sha256": "2412a11e8d5f3a17992cd4527501dc13a6671ffdc9bf30d0594d89ccd12641a6",
+      "main_commit_sha256": "2412a11e8d5f3a17992cd4527501dc13a6671ffdc9bf30d0594d89ccd12641a6",
+      "match": true
+    },
+    "Makefile": {
+      "standalone_snapshot_sha256": "a7e803b46ff58ae45e1ae6f2658b80461bd538aa5faad0d35224a029614631f6",
+      "main_commit_sha256": "a7e803b46ff58ae45e1ae6f2658b80461bd538aa5faad0d35224a029614631f6",
+      "match": true
+    },
+    "README.md": {
+      "standalone_snapshot_sha256": "d9ec951ce5b61ded1bee71fa2238f448f0af63bf55fe42b01e799e06cbef2f24",
+      "main_commit_sha256": "d9ec951ce5b61ded1bee71fa2238f448f0af63bf55fe42b01e799e06cbef2f24",
+      "match": true
+    }
+  },
+  "all_project_source_and_build_files_match": true,
+  "excluded_from_bundle_comparison": [
+    "interface.json"
+  ]
+}

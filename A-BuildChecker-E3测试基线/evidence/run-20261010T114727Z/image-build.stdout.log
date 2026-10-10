@@ -1,0 +1,34 @@
+Sending build context to Docker daemon  9.775kB
+
+Step 1/8 : FROM debian:bookworm-slim
+ ---> 3783cc01769c
+Step 2/8 : ARG DEBIAN_FRONTEND=noninteractive
+ ---> Using cache
+ ---> 59ee63930ded
+Step 3/8 : RUN apt-get update     && apt-get install -y --no-install-recommends         gcc         make         libc6-dev     && rm -rf /var/lib/apt/lists/*
+ ---> Using cache
+ ---> e5a35264d6f2
+Step 4/8 : WORKDIR /work
+ ---> Using cache
+ ---> f134827c1b8e
+Step 5/8 : COPY main.c      config.h      unused.h      Makefile      README.md      interface.json      ./
+ ---> 8828ba23e3cf
+Step 6/8 : RUN make     && test -x ./app
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in 4b724fbf4895
+cc -Wall -Wextra -std=c11 -c -o main.o main.c
+cc -Wall -Wextra -std=c11 -o app main.o
+ ---> Removed intermediate container 4b724fbf4895
+ ---> 78c549c17ba4
+Step 7/8 : LABEL org.opencontainers.image.title="E3 BuildChecker MD/RD environment"       org.opencontainers.image.source="https://github.com/Rowan-hhh/devops_lab1"       org.opencontainers.image.revision="29c02d6604d7071d4b249ec958dd8a553caa670a"       dev.devops-lab.project="e3-buildchecker-md-rd@2026-09-10"
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in 3205339e95f8
+ ---> Removed intermediate container 3205339e95f8
+ ---> 51c19b2c287b
+Step 8/8 : CMD ["./app"]
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in 84d4d1e3325f
+ ---> Removed intermediate container 84d4d1e3325f
+ ---> ce6e924d768c
+Successfully built ce6e924d768c
+Successfully tagged e3-buildchecker-md-rd:b1-20260910

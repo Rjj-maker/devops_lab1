@@ -33,4 +33,4 @@
 
 本机环境包已完成，且已从 Windows 挂载盘成功回载 tar 并断网运行。先前的 WSL `SIGBUS`/`swap.vhdx` 故障由 C 盘空间耗尽引起；释放空间后 WSL 和 Docker 已恢复，同一 tar 回载验证通过。
 
-A 组接收机的实际跨机器回执仍需在对方机器上留存；本记录证明本地交付归档可被 Docker 成功加载和运行。
+A 组已于 2026-10-11 从 GHCR 按固定 digest 拉取 B1 原始镜像，并核对 RepoDigest、Image ID、源码 revision 和 `linux/amd64` 平台；断网功能、MD stale/clean rebuild 与 RD rebuild 均通过。A 组接收端回执见 [`../../evidence/run-20261010T160627Z-ghcr/A_CROSS_MACHINE_RECEIPT.md`](../../evidence/run-20261010T160627Z-ghcr/A_CROSS_MACHINE_RECEIPT.md)。本文件记录 B1 本机导出和回载结果；跨机器验收结果以 A 组接收回执为准。

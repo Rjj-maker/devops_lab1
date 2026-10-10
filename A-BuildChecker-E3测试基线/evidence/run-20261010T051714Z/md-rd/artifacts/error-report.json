@@ -1,0 +1,50 @@
+{
+  "schema_version": "2.0",
+  "report_type": "ERROR_REPORT",
+  "producer_job_id": "job-e3-a-md-rd-29c02d66",
+  "repository": {
+    "url": "https://github.com/Rowan-hhh/devops_lab1.git",
+    "commit": "29c02d6604d7071d4b249ec958dd8a553caa670a"
+  },
+  "configuration_id": "cc-default",
+  "findings": [
+    {
+      "finding_id": "finding-e3-md-rd-missing-001",
+      "type": "MISSING",
+      "target": "main.o",
+      "dependency": "config.h",
+      "commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+      "location": {
+        "file": "A-BuildChecker-E3测试基线/fixtures/md-rd/Makefile",
+        "line": 11,
+        "column": 1
+      },
+      "evidence": {
+        "summary": "main.o reads config.h, but Makefile does not declare it.",
+        "process": "quoted-include vs makefile-prereq",
+        "observed_file": "config.h",
+        "declaration_file": "Makefile"
+      },
+      "detector": "INSTRUCTOR_ORACLE"
+    },
+    {
+      "finding_id": "finding-e3-md-rd-redundant-001",
+      "type": "REDUNDANT",
+      "target": "main.o",
+      "dependency": "unused.h",
+      "commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+      "location": {
+        "file": "A-BuildChecker-E3测试基线/fixtures/md-rd/Makefile",
+        "line": 11,
+        "column": 1
+      },
+      "evidence": {
+        "summary": "Makefile declares unused.h for main.o, but the translation unit does not include it.",
+        "process": "quoted-include vs makefile-prereq",
+        "observed_file": "main.c",
+        "declaration_file": "Makefile"
+      },
+      "detector": "INSTRUCTOR_ORACLE"
+    }
+  ]
+}

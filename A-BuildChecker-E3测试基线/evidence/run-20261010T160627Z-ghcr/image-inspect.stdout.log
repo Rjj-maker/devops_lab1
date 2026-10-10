@@ -1,0 +1,55 @@
+[
+    {
+        "Id": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+        "RepoTags": [
+            "ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6"
+        ],
+        "RepoDigests": [
+            "ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6"
+        ],
+        "Created": "2026-10-10T16:08:23.870793198+08:00",
+        "Config": {
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "./app"
+            ],
+            "WorkingDir": "/work",
+            "Labels": {
+                "dev.devops-lab.project": "e3-buildchecker-md-rd@2026-09-10",
+                "org.opencontainers.image.revision": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+                "org.opencontainers.image.source": "https://github.com/Rowan-hhh/devops_lab1",
+                "org.opencontainers.image.title": "E3 BuildChecker MD/RD environment"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 98037635,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:34467cc93912af891dfee8a3902adf9b4f355a9bca4eaa46f658d1181a21de0d",
+                "sha256:ad7336e1bc718389c4afb82798a6a363095bc56568ddd5594612ef841da2a6c6",
+                "sha256:8945febb04184bae9667d2099edb5feed375cd28e6b9a4777e4430cdc9e11a48",
+                "sha256:dd09dcaa0706d9da5855ca724343d92601d7e786dd43dfce2bb641876a480688",
+                "sha256:d254a9c2273c90b9c2e401d86c8c14d95cea404c9201050c5e164374c5f74245"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-10T16:07:55.042923352Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6",
+            "size": 1400
+        },
+        "Identity": {
+            "Pull": [
+                {
+                    "Repository": "ghcr.io/zaneow0/e3-buildchecker-md-rd"
+                }
+            ]
+        }
+    }
+]

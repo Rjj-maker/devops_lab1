@@ -5,7 +5,7 @@
 1. **① 接口、检测项目与 README 定义**（对接 B3）
 2. **③ BuildChecker 全量检测与 MD/RD 报告**（对接 B2）
 
-不覆盖② DRAFT 环境消费（A 组环境负责人 / B1）、④ Patch 验证与增量复核（A 组检测复核 / B4）、⑤ 最终双方交换（A 组交付负责人 / B4）。
+核心交付对应①检测项目与③全量分析。B1 已在 `fa07b7199e985b1dda63cc2efa467e5eb5a0f0ee` 提交 MD/RD 专用环境包；A 组已从 GHCR 按 digest 拉取 B1 原始镜像并通过最终接收复测，记录见 `evidence/run-20261010T160627Z-ghcr/`。E3 不要求实现 DRAFT API。④ Patch 验证与⑤最终双方交换分别由 A/B4 对接。
 
 E3 只准备可判断对错的项目、人工预期、命令和实际观察。这里没有部署 FULL_CHECK API，也不是 E5 的检测服务。
 
@@ -36,7 +36,10 @@ E3 只准备可判断对错的项目、人工预期、命令和实际观察。�
 | `oracle/` | `INSTRUCTOR_ORACLE` 预期发现和增量差 |
 | `scripts/run_a_buildchecker.py` | 静态检查、行为实验、构图和写报告 |
 | `B1-MD-RD环境/` | 基于 `fixtures/md-rd` 的专用 Docker 环境、验收脚本与跨机器导出说明 |
-| `evidence/` | 实际命令、退出码、图、报告、提交 bundle |
+| `evidence/` | 实际命令、退出码、图、报告、提交 bundle 和环境复核证据 |
+| `evidence/run-20261010T043534Z-md-rd-main-29c02/` | A 组从 B1 工具链基础镜像派生的 MD/RD 本地环境消费复核 |
+| `evidence/run-20261010T114727Z/` | A 组按 B1 Dockerfile 和 runner 独立构建的本地验收 |
+| `evidence/run-20261010T160627Z-ghcr/` | A 组按 GHCR digest 接收 B1 原始镜像并完成最终验收与行为复测 |
 
 ## 3. 输入检查
 
@@ -85,10 +88,10 @@ python3 A-BuildChecker-E3测试基线/scripts/run_a_buildchecker.py
 
 ## 7. B1 MD/RD 专用环境
 
-B1 环境包见 [`B1-MD-RD环境/README.md`](B1-MD-RD环境/README.md)。它使用本基线的 `fixtures/md-rd` 源码，可验证 `make` / `./app` 以及 MD stale/clean rebuild 和 RD 触发重编译行为。脚本可导出带 SHA-256 交付清单的 Docker image tar，用于 A 组跨机器复验。
+B1 环境包见 [`B1-MD-RD环境/README.md`](B1-MD-RD环境/README.md)。它使用本基线的 `fixtures/md-rd` 源码，可验证 `make` / `./app` 以及 MD stale/clean rebuild 和 RD 触发重编译行为。脚本可导出带 SHA-256 交付清单的 Docker image tar。B1 的本机验收结果见 `B1-MD-RD环境/evidence/FINAL_RESULT.md`；A 组已从 GHCR 按固定 digest 接收 B1 原始镜像并通过复测，接收回执见 `evidence/run-20261010T160627Z-ghcr/`。
 
 ## 8. 给 B 组的边界
 
 - **B3**：按 `docs/a1-interface.md` 和各项目 README 确认 DRAFT 能取得并运行这些项目。
 - **B2**：接收完整 ERROR_REPORT，只选 `MISSING`。RD 必须保留在报告里，不要交给修复器当输入。
-- **B1 镜像**：本项目必须使用 `B1-MD-RD环境/` 生成的镜像身份；Tiny Greeting 的 `image_ref` 仍不能用于本项目。
+- **B1 镜像**：Tiny Greeting 与 MD/RD 检测项目不是同一份源码，不能共用 `image_ref`。MD/RD 专用环境包见 `B1-MD-RD环境/`。A 组已从 `ghcr.io/zaneow0/e3-buildchecker-md-rd@sha256:5be5d74a921c8600aeb4ac7a62bdea27f74521008264130039849b8309c285d6` 拉取并核对 Image ID、RepoDigest、源码 revision 和平台；断网功能及 MD/RD 行为复测均通过，见 `evidence/run-20261010T160627Z-ghcr/`。E3 不要求实现 DRAFT API。

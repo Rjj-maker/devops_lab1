@@ -1,0 +1,10 @@
+{
+  "run_id": "run-20261010T051714Z",
+  "repository_head": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+  "runner_path": "A-BuildChecker-E3测试基线/scripts/run_a_buildchecker.py",
+  "runner_sha256_used_at_run": "fbc2559658d8aa5376ad88150c99fd6569f3de3c616bb30d430a315ec951f2cf",
+  "runner_sha256_in_head": "b9b6aee3010563d71e98e7405c5c87ca30f33c35ef553d2e26eaad1d551e2dda",
+  "runner_was_modified_in_worktree": true,
+  "local_change_scope": "Optional --md-rd-report-commit and --environment-image-ref recording; canonical report identity must equal current repository HEAD; generated snapshot commit is separately recorded.",
+  "report_producer_job_id": "job-e3-a-md-rd-29c02d66"
+}

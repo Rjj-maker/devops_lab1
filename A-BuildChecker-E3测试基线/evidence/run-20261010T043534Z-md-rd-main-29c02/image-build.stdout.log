@@ -1,0 +1,35 @@
+Sending build context to Docker daemon  11.27kB
+Step 1/7 : FROM e3-draft-tiny-greeting@sha256:66b6924106f5f9c5e66705c1678a58dfe81326ede0b3bc61d3a408f3a3a2c06a
+ ---> 66b6924106f5
+Step 2/7 : ARG SOURCE_COMMIT
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in dcca1e775ac7
+ ---> Removed intermediate container dcca1e775ac7
+ ---> d492fafa329d
+Step 3/7 : LABEL org.opencontainers.image.title="E3 BuildChecker MD-RD environment"       org.opencontainers.image.revision="${SOURCE_COMMIT}"       org.opencontainers.image.source="https://github.com/Rowan-hhh/devops_lab1"
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in 2604a1841414
+ ---> Removed intermediate container 2604a1841414
+ ---> 0620e357b8a5
+Step 4/7 : WORKDIR /workspace
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in cedae1566be5
+ ---> Removed intermediate container cedae1566be5
+ ---> 69429efe5af6
+Step 5/7 : COPY Makefile README.md config.h interface.json main.c unused.h ./
+ ---> a52994b41179
+Step 6/7 : RUN make clean     && make     && test -x ./app     && test "$(./app)" = "1"
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in c7e01396f970
+rm -f app main.o
+cc -Wall -Wextra -std=c11 -c -o main.o main.c
+cc -Wall -Wextra -std=c11 -o app main.o
+ ---> Removed intermediate container c7e01396f970
+ ---> 5c1792b972b9
+Step 7/7 : CMD ["./app"]
+ ---> [Warning] The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+ ---> Running in b89cb0cb1cab
+ ---> Removed intermediate container b89cb0cb1cab
+ ---> a74c1fd44aae
+Successfully built a74c1fd44aae
+Successfully tagged e3-buildchecker-md-rd:29c02d6

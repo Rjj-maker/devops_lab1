@@ -1,0 +1,13 @@
+{
+  "repository_url": "https://github.com/Rowan-hhh/devops_lab1.git",
+  "repository_commit": "29c02d6604d7071d4b249ec958dd8a553caa670a",
+  "project_root": "A-BuildChecker-E3测试基线/fixtures/md-rd",
+  "files": {
+    "Makefile": "a7e803b46ff58ae45e1ae6f2658b80461bd538aa5faad0d35224a029614631f6",
+    "README.md": "d9ec951ce5b61ded1bee71fa2238f448f0af63bf55fe42b01e799e06cbef2f24",
+    "config.h": "2573efdf6e122c087130fd32f829694daf92429315b05aa27d5265a790fdb50d",
+    "interface.json": "d0195e02ec1bb120d083f4c79b7f4261c12511bdaf2232782280e03c873ef7c8",
+    "main.c": "a1bbac023098d5bdd6302977e565b57c4959ee2c34d0787c1c5b2ea5c208ee9f",
+    "unused.h": "2412a11e8d5f3a17992cd4527501dc13a6671ffdc9bf30d0594d89ccd12641a6"
+  }
+}

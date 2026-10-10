@@ -1,0 +1,12 @@
+FROM e3-draft-tiny-greeting@sha256:66b6924106f5f9c5e66705c1678a58dfe81326ede0b3bc61d3a408f3a3a2c06a
+ARG SOURCE_COMMIT
+LABEL org.opencontainers.image.title="E3 BuildChecker MD-RD environment" \
+      org.opencontainers.image.revision="${SOURCE_COMMIT}" \
+      org.opencontainers.image.source="https://github.com/Rowan-hhh/devops_lab1"
+WORKDIR /workspace
+COPY Makefile README.md config.h interface.json main.c unused.h ./
+RUN make clean \
+    && make \
+    && test -x ./app \
+    && test "$(./app)" = "1"
+CMD ["./app"]
