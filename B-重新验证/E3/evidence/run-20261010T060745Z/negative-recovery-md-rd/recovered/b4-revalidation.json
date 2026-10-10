@@ -1,0 +1,39 @@
+{
+  "schema_version": "2.0",
+  "verification_status": "ACCEPTED",
+  "base_commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+  "candidate_commit": "37382e088e26b2827c3d9f7d4c5238d3d39d893f",
+  "configuration_id": "cc-default",
+  "finding_ids": [
+    "finding-e3-md-rd-missing-001"
+  ],
+  "validation": {
+    "clean": {
+      "success": true,
+      "exit_code": 0,
+      "duration_ms": 4,
+      "log_path": "b-evidence/clean.log"
+    },
+    "build": {
+      "success": true,
+      "exit_code": 0,
+      "duration_ms": 783,
+      "log_path": "b-evidence/build.log"
+    },
+    "test": {
+      "success": true,
+      "exit_code": 0,
+      "duration_ms": 3,
+      "log_path": "b-evidence/test.log"
+    },
+    "recheck": {
+      "success": true,
+      "exit_code": 0,
+      "duration_ms": 1858,
+      "log_path": "b-evidence/recheck.log"
+    }
+  },
+  "remaining_selected_findings": [],
+  "error": null,
+  "generated_at": "2026-10-10T06:08:02.008307Z"
+}

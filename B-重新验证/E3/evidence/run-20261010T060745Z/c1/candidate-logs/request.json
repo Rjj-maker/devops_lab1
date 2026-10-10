@@ -1,0 +1,17 @@
+{
+  "schema_version": "2.0",
+  "base_commit": "9c3e06606aa42afef25c53dbb5eb0c5a6330e5ea",
+  "candidate_commit": "d5d1d4a5a232094b1c2a5a74aadf3932b5ddedcf",
+  "configuration_id": "cc-MODE0",
+  "finding_ids": [
+    "finding-e3-c1-missing-001"
+  ],
+  "commands": {
+    "clean": "make clean",
+    "build": "make",
+    "test": "./app",
+    "recheck": "python3 b-evidence/recheck_e3_candidate.py --case c1 --workspace . --output b-evidence/recheck-report.json"
+  },
+  "recheck_report": "b-evidence/recheck-report.json",
+  "timeout_seconds": 60
+}

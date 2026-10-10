@@ -1,0 +1,17 @@
+{
+  "schema_version": "2.0",
+  "base_commit": "39430e3cdcf16403eec63bf592129b50ab1ff53d",
+  "candidate_commit": "37382e088e26b2827c3d9f7d4c5238d3d39d893f",
+  "configuration_id": "cc-default",
+  "finding_ids": [
+    "finding-e3-md-rd-missing-001"
+  ],
+  "commands": {
+    "clean": "make clean",
+    "build": "make",
+    "test": "./app",
+    "recheck": "python3 b-evidence/recheck_e3_candidate.py --case md-rd --workspace . --output b-evidence/recheck-report.json"
+  },
+  "recheck_report": "b-evidence/recheck-report.json",
+  "timeout_seconds": 60
+}

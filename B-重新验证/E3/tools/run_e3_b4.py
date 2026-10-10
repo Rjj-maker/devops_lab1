@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import shlex
 import shutil
 import subprocess
 import sys
@@ -18,6 +17,8 @@ from typing import Sequence
 B4_ROOT = Path(__file__).resolve().parents[2]
 GENERIC_TOOL_DIR = B4_ROOT / "tools"
 E3_TOOL_DIR = Path(__file__).resolve().parent
+RECHECK_RUNNER_RELATIVE = Path("b-evidence") / "recheck_e3_candidate.py"
+INTENTIONAL_FAILURE_TARGET = "e3-b4-intentional-build-failure"
 sys.path.insert(0, str(GENERIC_TOOL_DIR))
 sys.path.insert(0, str(E3_TOOL_DIR))
 
@@ -126,18 +127,17 @@ def _candidate_identity(spec: CandidateSpec, bundle: Path, workspace: Path) -> d
 
 
 def _request(spec: CandidateSpec) -> dict[str, object]:
-    recheck_script = E3_TOOL_DIR / "recheck_e3_candidate.py"
     recheck_command = " ".join(
-        [
-            shlex.quote(sys.executable),
-            shlex.quote(str(recheck_script)),
+        (
+            "python3",
+            RECHECK_RUNNER_RELATIVE.as_posix(),
             "--case",
-            shlex.quote(spec.name),
+            spec.name,
             "--workspace",
             ".",
             "--output",
             "b-evidence/recheck-report.json",
-        ]
+        )
     )
     return {
         "schema_version": "2.0",
@@ -154,6 +154,77 @@ def _request(spec: CandidateSpec) -> dict[str, object]:
         "recheck_report": "b-evidence/recheck-report.json",
         "timeout_seconds": 60,
     }
+
+
+def _prepare_recheck_runner(candidate: Path) -> Path:
+    """Place the E3 recheck entry point inside the candidate workspace."""
+
+    runner = candidate / RECHECK_RUNNER_RELATIVE
+    runner.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(E3_TOOL_DIR / "recheck_e3_candidate.py", runner)
+    return runner
+
+
+def _clone_candidate(bundle_path: Path, candidate: Path) -> None:
+    cloned = subprocess.run(
+        ["git", "clone", "--no-checkout", str(bundle_path), str(candidate)],
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    if cloned.returncode != 0:
+        raise CandidateVerificationError(
+            f"candidate bundle clone exited with {cloned.returncode}: {cloned.stderr}"
+        )
+
+
+def _persist_execution_evidence(
+    candidate: Path,
+    evidence_dir: Path,
+    identity: dict[str, object],
+    request: dict[str, object],
+    output_path: Path,
+) -> None:
+    evidence_dir.mkdir(parents=True)
+    _write_json(evidence_dir / "candidate-identity.json", identity)
+    _write_json(evidence_dir / "request.json", request)
+    shutil.copytree(candidate / "b-evidence", evidence_dir / "candidate-logs")
+    shutil.copy2(output_path, evidence_dir / "b4-revalidation.json")
+    recheck_report = candidate / "b-evidence" / "recheck-report.json"
+    if recheck_report.is_file():
+        shutil.copy2(recheck_report, evidence_dir / "recheck-report.json")
+
+
+def _run_candidate_verification(
+    spec: CandidateSpec,
+    candidate: Path,
+    identity: dict[str, object],
+    evidence_dir: Path,
+) -> dict[str, object]:
+    _prepare_recheck_runner(candidate)
+    request = _request(spec)
+    request_path = candidate / "b-evidence" / "request.json"
+    _write_json(request_path, request)
+    output_path = candidate / "b-evidence" / "b4-revalidation.json"
+    report = run_verification(request, candidate, output_path)
+    _persist_execution_evidence(candidate, evidence_dir, identity, request, output_path)
+    return report
+
+
+def _with_intentional_build_failure(original_makefile: bytes) -> bytes:
+    """Return a temporary negative-probe Makefile without touching a B2 input."""
+
+    probe = (
+        "\n# E3 B4 negative recovery probe: this target intentionally fails.\n"
+        f".PHONY: {INTENTIONAL_FAILURE_TARGET}\n"
+        f"all: {INTENTIONAL_FAILURE_TARGET}\n\n"
+        f"{INTENTIONAL_FAILURE_TARGET}:\n"
+        "\t@printf '%s\\n' 'E3 intentional invalid-candidate probe'\n"
+        "\t@false\n"
+    ).encode("utf-8")
+    return original_makefile.rstrip(b"\n") + b"\n" + probe
 
 
 def _write_json(path: Path, payload: object) -> None:
@@ -175,34 +246,81 @@ def verify_candidate(
 
     with tempfile.TemporaryDirectory(prefix=f"e3-b4-{spec.name}-") as temp_dir:
         candidate = Path(temp_dir) / "candidate"
-        cloned = subprocess.run(
-            ["git", "clone", "--no-checkout", str(bundle_path), str(candidate)],
-            check=False,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-        )
-        if cloned.returncode != 0:
-            raise CandidateVerificationError(
-                f"candidate bundle clone exited with {cloned.returncode}: {cloned.stderr}"
-            )
+        _clone_candidate(bundle_path, candidate)
         identity = _candidate_identity(spec, bundle_path, candidate)
-        request = _request(spec)
-        request_path = candidate / "b-evidence" / "request.json"
-        _write_json(request_path, request)
-        output_path = candidate / "b-evidence" / "b4-revalidation.json"
-        report = run_verification(request, candidate, output_path)
+        return _run_candidate_verification(spec, candidate, identity, evidence_dir)
 
-        evidence_dir.mkdir(parents=True)
-        _write_json(evidence_dir / "candidate-identity.json", identity)
-        _write_json(evidence_dir / "request.json", request)
-        shutil.copytree(candidate / "b-evidence", evidence_dir / "candidate-logs")
-        shutil.copy2(output_path, evidence_dir / "b4-revalidation.json")
-        recheck_report = candidate / "b-evidence" / "recheck-report.json"
-        if recheck_report.is_file():
-            shutil.copy2(recheck_report, evidence_dir / "recheck-report.json")
-        return report
+
+def verify_rejected_recovery(
+    spec: CandidateSpec, bundle_path: Path, evidence_dir: Path
+) -> dict[str, object]:
+    """Record a deliberate rejected probe and byte-for-byte Makefile recovery."""
+
+    bundle_path = Path(bundle_path).resolve()
+    evidence_dir = Path(evidence_dir).resolve()
+    if not bundle_path.is_file():
+        raise CandidateVerificationError(f"candidate bundle does not exist: {bundle_path}")
+    if evidence_dir.exists():
+        raise CandidateVerificationError(f"evidence directory already exists: {evidence_dir}")
+
+    with tempfile.TemporaryDirectory(prefix=f"e3-b4-negative-{spec.name}-") as temp_dir:
+        candidate = Path(temp_dir) / "candidate"
+        _clone_candidate(bundle_path, candidate)
+        identity = _candidate_identity(spec, bundle_path, candidate)
+        makefile = candidate / "Makefile"
+        original_makefile = makefile.read_bytes()
+        original_sha256 = hashlib.sha256(original_makefile).hexdigest()
+
+        makefile.write_bytes(_with_intentional_build_failure(original_makefile))
+        rejected = _run_candidate_verification(
+            spec, candidate, identity, evidence_dir / "rejected"
+        )
+
+        makefile.write_bytes(original_makefile)
+        restored_sha256 = _sha256(makefile)
+        makefile_restored = restored_sha256 == original_sha256
+        if not makefile_restored:
+            raise CandidateVerificationError("Makefile bytes did not restore after negative probe")
+        _run_git(candidate, "diff", "--quiet", "--", "Makefile")
+        recovered = _run_candidate_verification(
+            spec, candidate, identity, evidence_dir / "recovered"
+        )
+
+        summary = {
+            "scenario": "intentional-build-failure-then-makefile-restore",
+            "case": spec.name,
+            "source_candidate_commit": spec.candidate_commit,
+            "candidate_identity": identity,
+            "injected_change": {
+                "file": "Makefile",
+                "target": INTENTIONAL_FAILURE_TARGET,
+                "purpose": "negative probe only; not a B2 candidate Patch",
+            },
+            "rejected": rejected,
+            "restore": {
+                "original_makefile_sha256": original_sha256,
+                "restored_makefile_sha256": restored_sha256,
+                "makefile_sha256_matches_original": makefile_restored,
+            },
+            "recovered": recovered,
+        }
+        _write_json(evidence_dir / "recovery-summary.json", summary)
+        return summary
+
+
+def _recovery_succeeded(summary: dict[str, object]) -> bool:
+    rejected = summary["rejected"]
+    recovered = summary["recovered"]
+    if not isinstance(rejected, dict) or not isinstance(recovered, dict):
+        return False
+    error = rejected.get("error")
+    return (
+        rejected.get("verification_status") == "REJECTED"
+        and isinstance(error, dict)
+        and error.get("code") == "REPAIR_3001"
+        and error.get("stage") == "build"
+        and recovered.get("verification_status") == "ACCEPTED"
+    )
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -210,8 +328,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--case", choices=sorted(CASES), required=True)
     parser.add_argument("--bundle", type=Path, required=True)
     parser.add_argument("--evidence-dir", type=Path, required=True)
+    parser.add_argument(
+        "--negative-recovery",
+        action="store_true",
+        help="record an isolated rejected-build probe and original-Makefile recovery",
+    )
     args = parser.parse_args(argv)
     try:
+        if args.negative_recovery:
+            summary = verify_rejected_recovery(
+                CASES[args.case], args.bundle, args.evidence_dir
+            )
+            passed = _recovery_succeeded(summary)
+            print("REJECTED_AND_RECOVERED" if passed else "RECOVERY_FAILED")
+            return 0 if passed else 1
         report = verify_candidate(CASES[args.case], args.bundle, args.evidence_dir)
     except (CandidateVerificationError, OSError, RequestValidationError, ValueError) as exc:
         print(str(exc), file=sys.stderr)

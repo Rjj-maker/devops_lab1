@@ -1,4 +1,5 @@
 import hashlib
+import json
 import subprocess
 import sys
 import tempfile
@@ -9,7 +10,13 @@ from pathlib import Path
 TOOLS_DIR = Path(__file__).resolve().parents[1] / "tools"
 sys.path.insert(0, str(TOOLS_DIR))
 
-from run_e3_b4 import CandidateSpec, verify_candidate  # noqa: E402
+from run_e3_b4 import (  # noqa: E402
+    CASES,
+    CandidateSpec,
+    main as run_e3_b4_main,
+    verify_candidate,
+    verify_rejected_recovery,
+)
 
 
 class E3B4RunnerTests(unittest.TestCase):
@@ -82,6 +89,13 @@ class E3B4RunnerTests(unittest.TestCase):
             self.assertTrue((evidence_dir / "candidate-logs" / "build.log").is_file())
             self.assertTrue((evidence_dir / "candidate-logs" / "recheck.log").is_file())
             self.assertTrue((evidence_dir / "recheck-report.json").is_file())
+            request = json.loads((evidence_dir / "request.json").read_text(encoding="utf-8"))
+            recheck_command = request["commands"]["recheck"]
+            self.assertTrue(recheck_command.startswith("python3 b-evidence/"))
+            self.assertNotIn(str(TOOLS_DIR), recheck_command)
+            self.assertTrue(
+                (evidence_dir / "candidate-logs" / "recheck_e3_candidate.py").is_file()
+            )
 
     def test_runner_preserves_rejection_evidence_when_incremental_rebuild_fails(self):
         """A rejected candidate must retain its B4 report and recheck log for B2."""
@@ -124,6 +138,103 @@ class E3B4RunnerTests(unittest.TestCase):
             self.assertEqual(report["error"]["stage"], "recheck")
             self.assertTrue((evidence_dir / "b4-revalidation.json").is_file())
             self.assertTrue((evidence_dir / "candidate-logs" / "recheck.log").is_file())
+
+    def test_rejected_probe_restores_original_makefile_before_revalidation(self):
+        """A deliberate invalid candidate must reject, restore, and then revalidate cleanly."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            source = root / "source"
+            source.mkdir()
+            self.run_git(source, "init", "-b", "main")
+            self.run_git(source, "config", "user.name", "B4 Test")
+            self.run_git(source, "config", "user.email", "b4-test@example.invalid")
+
+            self.write_candidate_files(source, fixed=False)
+            self.run_git(source, "add", ".")
+            self.run_git(source, "commit", "-m", "base")
+            base_commit = self.run_git(source, "rev-parse", "HEAD")
+            self.write_candidate_files(source, fixed=True)
+            self.run_git(source, "add", "Makefile")
+            self.run_git(source, "commit", "-m", "declare config header")
+            candidate_commit = self.run_git(source, "rev-parse", "HEAD")
+            original_makefile = (source / "Makefile").read_bytes()
+            bundle = root / "candidate.bundle"
+            self.run_git(source, "bundle", "create", str(bundle), "--all")
+            spec = CandidateSpec(
+                name="md-rd",
+                base_commit=base_commit,
+                candidate_commit=candidate_commit,
+                configuration_id="cc-default",
+                selected_finding_id="finding-e3-md-rd-missing-001",
+                bundle_sha256=hashlib.sha256(bundle.read_bytes()).hexdigest(),
+            )
+            evidence_dir = root / "negative-recovery"
+
+            summary = verify_rejected_recovery(spec, bundle, evidence_dir)
+
+            self.assertEqual(summary["rejected"]["verification_status"], "REJECTED")
+            self.assertEqual(summary["rejected"]["error"]["code"], "REPAIR_3001")
+            self.assertEqual(summary["rejected"]["error"]["stage"], "build")
+            self.assertEqual(summary["recovered"]["verification_status"], "ACCEPTED")
+            self.assertTrue(summary["restore"]["makefile_sha256_matches_original"])
+            self.assertEqual((source / "Makefile").read_bytes(), original_makefile)
+            self.assertTrue((evidence_dir / "rejected" / "b4-revalidation.json").is_file())
+            self.assertTrue((evidence_dir / "rejected" / "candidate-logs" / "build.log").is_file())
+            self.assertTrue((evidence_dir / "recovered" / "recheck-report.json").is_file())
+
+    def test_cli_runs_negative_recovery_probe_and_returns_success_after_restore(self):
+        """The documented negative-recovery command must return success only after recovery."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            source = root / "source"
+            source.mkdir()
+            self.run_git(source, "init", "-b", "main")
+            self.run_git(source, "config", "user.name", "B4 Test")
+            self.run_git(source, "config", "user.email", "b4-test@example.invalid")
+
+            self.write_candidate_files(source, fixed=False)
+            self.run_git(source, "add", ".")
+            self.run_git(source, "commit", "-m", "base")
+            base_commit = self.run_git(source, "rev-parse", "HEAD")
+            self.write_candidate_files(source, fixed=True)
+            self.run_git(source, "add", "Makefile")
+            self.run_git(source, "commit", "-m", "declare config header")
+            candidate_commit = self.run_git(source, "rev-parse", "HEAD")
+            bundle = root / "candidate.bundle"
+            self.run_git(source, "bundle", "create", str(bundle), "--all")
+            spec = CandidateSpec(
+                name="md-rd",
+                base_commit=base_commit,
+                candidate_commit=candidate_commit,
+                configuration_id="cc-default",
+                selected_finding_id="finding-e3-md-rd-missing-001",
+                bundle_sha256=hashlib.sha256(bundle.read_bytes()).hexdigest(),
+            )
+            evidence_dir = root / "negative-recovery"
+
+            original_spec = CASES[spec.name]
+            CASES[spec.name] = spec
+            try:
+                try:
+                    exit_code = run_e3_b4_main(
+                        [
+                            "--case",
+                            spec.name,
+                            "--bundle",
+                            str(bundle),
+                            "--evidence-dir",
+                            str(evidence_dir),
+                            "--negative-recovery",
+                        ]
+                    )
+                except SystemExit as exc:
+                    exit_code = exc.code
+            finally:
+                CASES[spec.name] = original_spec
+
+            self.assertEqual(exit_code, 0)
+            summary = json.loads((evidence_dir / "recovery-summary.json").read_text(encoding="utf-8"))
+            self.assertEqual(summary["recovered"]["verification_status"], "ACCEPTED")
 
 
 if __name__ == "__main__":

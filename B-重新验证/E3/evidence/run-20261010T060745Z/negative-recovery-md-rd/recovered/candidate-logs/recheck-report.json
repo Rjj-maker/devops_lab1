@@ -1,0 +1,70 @@
+{
+  "schema_version": "2.0",
+  "case": "md-rd",
+  "target": "main.o",
+  "selected_finding_id": "finding-e3-md-rd-missing-001",
+  "declared_prerequisites": [
+    "config.h",
+    "main.c",
+    "unused.h"
+  ],
+  "actual_dependencies": [
+    "config.h",
+    "main.c"
+  ],
+  "findings": [
+    {
+      "finding_id": "finding-e3-md-rd-redundant-001",
+      "type": "REDUNDANT",
+      "target": "main.o",
+      "dependency": "unused.h"
+    }
+  ],
+  "remaining_selected_findings": [],
+  "incremental_probe": {
+    "passed": true,
+    "expected_stdout": "2\n",
+    "observed_stdout": "2\n",
+    "clean": {
+      "command": [
+        "make",
+        "clean"
+      ],
+      "exit_code": 0,
+      "stdout": "rm -f app main.o\n",
+      "stderr": ""
+    },
+    "build": {
+      "command": [
+        "make"
+      ],
+      "exit_code": 0,
+      "stdout": "cc -Wall -Wextra -std=c11 -c -o main.o main.c\ncc -Wall -Wextra -std=c11 -o app main.o\n",
+      "stderr": ""
+    },
+    "baseline": {
+      "command": [
+        "./app"
+      ],
+      "exit_code": 0,
+      "stdout": "1\n",
+      "stderr": ""
+    },
+    "incremental_make": {
+      "command": [
+        "make"
+      ],
+      "exit_code": 0,
+      "stdout": "cc -Wall -Wextra -std=c11 -c -o main.o main.c\ncc -Wall -Wextra -std=c11 -o app main.o\n",
+      "stderr": ""
+    },
+    "incremental_app": {
+      "command": [
+        "./app"
+      ],
+      "exit_code": 0,
+      "stdout": "2\n",
+      "stderr": ""
+    }
+  }
+}
