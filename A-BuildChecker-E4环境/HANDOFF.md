@@ -28,7 +28,7 @@
 | 模板目录 | `A-buildchecker/`（教师包原文，已去掉外层 `E4实验包/`） |
 | README | `A-buildchecker/README.md` |
 | 构建 / 验证 | 在该目录执行 `make doctor`、`make all` |
-| 模板 SHA | **把 `A-buildchecker/` 提交进 `main` 之后**，在该目录执行 `git rev-parse HEAD` |
+| 模板 SHA | `eb317899420d8a11303f2273c6701b9ab6413fbb`（官方 `A-buildchecker/` 入库提交） |
 | 服务器 `make all` | 未做（ECS 尚无 Docker）。属 ② 之后 |
 
 本组远程仓库还有 E3 材料，所以模板不能铺在仓库最外层根目录（那里没有单独给 E4 腾空）。B3 克隆后进入 `A-buildchecker/` 再跑命令。
@@ -39,7 +39,7 @@
 | --- | --- |
 | 仓库地址 | https://github.com/Rowan-hhh/devops_lab1 |
 | 进入目录 | `A-buildchecker/` |
-| 模板 SHA | （提交后填写） |
+| 模板 SHA | `eb317899420d8a11303f2273c6701b9ab6413fbb` |
 | 构建 / 验证 | `make doctor`；`make all`（doctor → build → test → smoke → scan） |
 | 冒烟内部 | `fixtures/md-rd/`：`make` + `./app`，`app_output` 为 `1` |
 | 基础镜像 | `m.daocloud.io/docker.io/library/python@sha256:f82c96458eedc847b233e582eb31336f4954b39cae020b6dcf5b3ed0e5cbcd74` |
